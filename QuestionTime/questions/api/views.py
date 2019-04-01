@@ -35,7 +35,7 @@ class AnswerLikeAPIView(APIView):
     def delete(self, request, pk):
         """Remove request.user from the voters queryset of an answer instance."""
         answer = get_object_or_404(Answer, pk=pk)
-        user = self.request.user
+        user = request.user
 
         answer.voters.remove(user)
         answer.save()
@@ -48,7 +48,7 @@ class AnswerLikeAPIView(APIView):
     def post(self, request, pk):
         """Add request.user to the voters queryset of an answer instance."""
         answer = get_object_or_404(Answer, pk=pk)
-        user = self.request.user
+        user = request.user
 
         answer.voters.add(user)
         answer.save()
