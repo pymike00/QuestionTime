@@ -9,5 +9,6 @@
         {{ form|crispy }}
         <button type="submit" class="btn btn-sm btn-outline-primary">Create Account</button>
     </form>
+    <p class="mt-2">Or <a href="{% url 'login' %}">Login</a></p>
 </div>
 {% endblock %}
