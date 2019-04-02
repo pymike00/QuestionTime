@@ -7,6 +7,7 @@ django-allauth==0.39.1
 django-crispy-forms==1.7.2
 django-registration==3.0
 django-rest-auth==0.9.3
+django-webpack-loader==0.6.0
 djangorestframework==3.9.2
 idna==2.8
 oauthlib==3.0.1
