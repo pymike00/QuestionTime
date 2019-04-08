@@ -4,7 +4,7 @@
       <router-link 
         :to="{ name: 'home' }" 
         class="navbar-brand"
-      >QuestionTime
+        >QuestionTime
       </router-link>
 
       <div class="collapse navbar-collapse">
@@ -13,18 +13,20 @@
             <router-link
               :to="{ name: 'home' }" 
               class="btn btn-sm btn-success"
-            >Home
+              >Home
             </router-link>
           </li>
           <li class="nav-item mx-1">
             <router-link 
-              :to="{ name: 'about' }" 
+              :to="{ name: 'home' }" 
               class="btn btn-sm btn-danger"
-            >About
+              >Add Question
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="btn btn-sm btn-outline-secondary" href="/accounts/logout/">Logout</a>
+            <a class="btn btn-sm btn-outline-secondary" href="/accounts/logout/"
+              >Logout
+            </a>
           </li>
         </ul>
       </div>
@@ -52,4 +54,3 @@ export default {
   color: #dc3545 !important;
 }
 </style>
-
