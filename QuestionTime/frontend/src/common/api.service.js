@@ -6,6 +6,7 @@ async function getJSON(response) {
 }
 
 function apiService(endpoint, method, data) {
+  // D.R.Y. code to make HTTP requests to the REST API backend using fetch
   const config = {
     method: method || "GET",
     body: data !== undefined ? JSON.stringify(data) : null,

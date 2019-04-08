@@ -25,6 +25,7 @@ export default {
   },
   methods: {
     getQuestions() {
+      // make a GET Request to the questions list endpoint and populate the questions array
       let endpoint = "api/questions/";
       apiService(endpoint)
         .then(data => {
