@@ -43,8 +43,8 @@ export default {
             this.$router.push({ 
               name: 'question', 
               params: { slug: question_data.slug }
-          })          
-        })  
+            })          
+          })  
       }
     }
   },
