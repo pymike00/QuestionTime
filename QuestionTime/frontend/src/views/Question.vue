@@ -42,7 +42,9 @@
       <AnswerComponent 
         v-for="(answer, index) in answers"
         :answer="answer"
+        :requestUser="requestUser"
         :key="index"
+        @delete-answer="deleteAnswer"
       />
       <div class="my-4">
         <p v-show="loadingAnswers">...loading...</p>
@@ -80,12 +82,16 @@ export default {
       newAnswerBody: null,
       error: null,
       userHasAnswered: false,
-      showForm: false
+      showForm: false,
+      requestUser: null
     }
   },
   methods: {
     setPageTitle(title) {
       document.title = title;
+    },
+    setRequestUser() {
+      this.requestUser = window.localStorage.getItem("username");
     },
     getQuestionData() {
       // get the details of a question instance from the REST API and call setPageTitle
@@ -132,11 +138,24 @@ export default {
       } else {
         this.error = "You can't send an empty answer!";
       }
+    },
+    async deleteAnswer(answer) {
+      // delete a given answer from the answers property and make a delete request to the REST API
+      let endpoint = `/api/answers/${answer.id}/`;
+      try {
+        await apiService(endpoint, "DELETE")
+        this.$delete(this.answers, this.answers.indexOf(answer))
+        this.userHasAnswered = false;
+      }
+      catch (err) {
+        console.log(err)
+      }
     }
   },
   created() {
     this.getQuestionData()
     this.getQuestionAnswers()
+    this.setRequestUser()
   }
 }
 </script>
