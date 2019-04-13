@@ -52,7 +52,7 @@ export default {
     }
   },
   async beforeRouteEnter(to, from, next) {
-    // get the answer's data from the REST API and pass two parameters as props for the component
+    // get the answer's data from the REST API and set two data properties for the component
     let endpoint = `/api/answers/${to.params.id}/`;
     let data = await apiService(endpoint);
     return next(vm => (
