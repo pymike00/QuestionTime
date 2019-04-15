@@ -2,6 +2,10 @@
   <div class="single-question mt-2">
     <div class="container">
       <h1>{{ question.content }}</h1>
+      <QuestionActions
+        v-if="isQuestionAuthor"
+        :slug="question.slug"
+      />
       <p class="mb-0">Posted by:
         <span class="author-name">{{ question.author }}</span>
       </p>
@@ -62,6 +66,7 @@
 <script>
 import { apiService } from "@/common/api.service.js";
 import AnswerComponent from "@/components/Answer.vue";
+import QuestionActions from "@/components/QuestionActions.vue";
 export default {
   name: "Question",
   props: {
@@ -71,7 +76,8 @@ export default {
     }
   },
   components: {
-    AnswerComponent
+    AnswerComponent,
+    QuestionActions
   },
   data() {
     return {
@@ -86,11 +92,19 @@ export default {
       requestUser: null
     }
   },
+  computed: {
+    isQuestionAuthor() {
+      // return true if the logged in user is also the author of the question instance
+      return this.question.author === this.requestUser;
+    }
+  },
   methods: {
     setPageTitle(title) {
+      // set a given title string as the webpage title
       document.title = title;
     },
     setRequestUser() {
+      // the username has been set to localStorage by the App.vue component
       this.requestUser = window.localStorage.getItem("username");
     },
     getQuestionData() {
@@ -104,7 +118,7 @@ export default {
         })
     },
     getQuestionAnswers() {
-      // get a page of answers for a single question from the REST API 
+      // get a page of answers for a single question from the REST API's paginated 'Questions Endpoint'
       let endpoint = `/api/questions/${this.slug}/answers/`;
       if (this.next) {
         endpoint = this.next;
@@ -122,7 +136,7 @@ export default {
         })
     },
     onSubmit() {
-      // submit the content of a new answer to the REST API, then update some data properties
+      // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
       if (this.newAnswerBody) {
         let endpoint = `/api/questions/${this.slug}/answer/`;
         apiService(endpoint, "POST", { body: this.newAnswerBody })
@@ -140,7 +154,7 @@ export default {
       }
     },
     async deleteAnswer(answer) {
-      // delete a given answer from the answers property and make a delete request to the REST API
+      // delete a given answer from the answers array and make a delete request to the REST API
       let endpoint = `/api/answers/${answer.id}/`;
       try {
         await apiService(endpoint, "DELETE")
@@ -176,4 +190,3 @@ export default {
   color: red; 
 }
 </style>
-
