@@ -1,17 +1,13 @@
 {% extends "base.html" %}
-{% load static %}
-
-{% block style %}
-    <link rel="stylesheet" href="{% static 'bundle.css' %}">
-{% endblock %}
+{% load render_bundle from webpack_loader %}
 
 {% block content %}
 <noscript>
     <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
 </noscript>
-<div id="app"></div>
-{% endblock %}
 
-{% block js %}
-    <script src="{% static 'bundle.js' %}"></script>
+<div id="app"></div>
+
+<!-- built files will be auto injected -->
+{% render_bundle 'app' %}
 {% endblock %}
