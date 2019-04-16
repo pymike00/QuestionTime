@@ -44,10 +44,10 @@
     </div>
     <div class="container">
       <AnswerComponent 
-        v-for="(answer, index) in answers"
+        v-for="answer in answers"
         :answer="answer"
         :requestUser="requestUser"
-        :key="index"
+        :key="answer.id"
         @delete-answer="deleteAnswer"
       />
       <div class="my-4">
