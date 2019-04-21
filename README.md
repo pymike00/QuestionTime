@@ -1,11 +1,17 @@
 # QuestionTime
 A Quora-like Single Page Application built with Django, Django REST Framework and Vue JS
 
-This is the source code of the Final Project of my Udemy Course "The Complete Guide to Django REST Framework and Vue JS", where you can learn how to build professional REST APIs with Django and Vue JS. This is an intermediate/advanced level course, knowledge of Python, Django, HTML, CSS and JavaScript is assumed. The course is available in English and Italian.
+This is the source code of the Final Project of my Udemy Course "The Complete Guide to Django REST Framework and Vue JS", where you can learn how to build professional Single Page Applications with Django and Vue JS. 
 
-ENROLL NOW HERE: [ENROLL](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=PROMO_LAUNCH)
+This is an intermediate/advanced level course, knowledge of Python, Django, HTML, CSS and JavaScript is assumed. 
 
-VERSIONE ITALIANA: [ISCRIVITI](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=PROMO_LAUNCH)
+You will learn how to build professional REST APIs with Django REST Framework, powerful Reactive Components with Vue JS and Single Page Applications like this one using both Django and Vue JS.
+
+The course is available in both English and Italian:
+
+English Version: [ENROLL NOW](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=PROMO_LAUNCH)
+
+VERSIONE ITALIANA: [ISCRIVITI ORA](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=PROMO_LAUNCH)
 
 ## How to test the code?
 
