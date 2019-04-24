@@ -13,7 +13,7 @@ English Version: [ENROLL NOW](https://www.udemy.com/the-complete-guide-to-django
 
 VERSIONE ITALIANA: [ISCRIVITI ORA](https://www.udemy.com/guida-per-sviluppatori-a-django-rest-framework-e-vue-js/?couponCode=OFFERTA_LANCIO)
 
-## How to test the code?
+## Hot to set up the project to run on your local machine?
 
 #### Download the code to your PC, unpack the zip and move inside the folder.
 
