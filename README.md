@@ -37,7 +37,12 @@ cd QuestionTime/frontend
 npm install
 ```
 
-#### Launch Django's development server:
+#### Run Vue JS Development Server:
+```
+npm run serve
+```
+
+#### Run Django's development server:
 ```
 python manage.py runserver
 ```
