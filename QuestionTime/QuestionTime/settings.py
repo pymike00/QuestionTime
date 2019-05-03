@@ -169,7 +169,7 @@ REST_FRAMEWORK = {
         'rest_framework.permissions.IsAuthenticated',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 4 # 10 could be a good value to assign in production. Remember: this currently also applies to answers
+    'PAGE_SIZE': 6 # 10 could be a good value to assign in production. Remember: this currently also applies to answers
 }
 
 WEBPACK_LOADER = {
