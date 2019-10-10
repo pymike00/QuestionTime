@@ -9,9 +9,9 @@ Enroll now if you want to learn how to build professional REST APIs with Django 
 
 The course is available in both English and Italian:
 
-English Version: [ENROLL NOW](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=GITHUB_PROMO)
+English Version: [ENROLL NOW](https://www.udemy.com/course/the-complete-guide-to-django-rest-framework-and-vue-js/?referralCode=A2FA0F6C1C4BE66A3B3E)
 
-VERSIONE ITALIANA: [ISCRIVITI ORA](https://www.udemy.com/guida-per-sviluppatori-a-django-rest-framework-e-vue-js/?couponCode=OFFERTA_LANCIO)
+VERSIONE ITALIANA: [ISCRIVITI ORA](https://www.udemy.com/course/guida-per-sviluppatori-a-django-rest-framework-e-vue-js/?referralCode=DD17CAECBF2D0306DF94)
 
 ## Hot to set up the project to run on your local machine?
 
@@ -53,6 +53,6 @@ Would you like to learn how to create powerful Single Page Applications like thi
 
 I have got the course for you!
 
-[Click HERE to Enroll Now!](https://www.udemy.com/the-complete-guide-to-django-rest-framework-and-vue-js/?couponCode=PROMO_LAUNCH)
+[Click HERE to Enroll Now!](https://www.udemy.com/course/the-complete-guide-to-django-rest-framework-and-vue-js/?referralCode=A2FA0F6C1C4BE66A3B3E)
 
 30 Day Money Back Guarantee.
