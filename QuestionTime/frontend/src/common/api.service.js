@@ -27,3 +27,10 @@ function apiService(endpoint, method, data) {
 }
 
 export { apiService };
+
+
+const axios = require("axios");
+axios.defaults.xsrfCookieName = "csrftoken";
+axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
+
+export { axios };

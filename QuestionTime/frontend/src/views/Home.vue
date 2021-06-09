@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import { axios } from "@/common/api.service.js";
 export default {
   name: "home",
   data() {
@@ -42,22 +42,21 @@ export default {
     };
   },
   methods: {
-    getQuestions() {
+    async getQuestions() {
       // make a GET Request to the questions list endpoint and populate the questions array
       let endpoint = "/api/questions/";
       if (this.next) {
         endpoint = this.next;
       }
       this.loadingQuestions = true;
-      apiService(endpoint).then((data) => {
-        this.questions.push(...data.results);
-        this.loadingQuestions = false;
-        if (data.next) {
-          this.next = data.next;
-        } else {
-          this.next = null;
-        }
-      });
+      const response = await axios.get(endpoint);
+      this.questions.push(...response.data.results);
+      this.loadingQuestions = false;
+      if (response.data.next) {
+        this.next = response.data.next;
+      } else {
+        this.next = null;
+      }
     },
   },
   created() {
