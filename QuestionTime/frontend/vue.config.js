@@ -1,44 +1,26 @@
-const BundleTracker = require("webpack-bundle-tracker");
+// Inspired by: https://github.com/EugeneDae/django-vue-cli-webpack-demo
 
 module.exports = {
-    // on Windows you might want to set publicPath: "http://127.0.0.1:8080/" 
-    publicPath: "http://0.0.0.0:8080/", 
-    outputDir: './dist/',
+    publicPath: process.env.NODE_ENV === 'production' ? '/static/dist/' : 'http://127.0.0.1:8080',
+    outputDir: '../static/dist',
+    indexPath: '../../templates/index.html', // relative to outputDir!
 
     chainWebpack: config => {
-
-        config
-            .plugin('BundleTracker')
-            .use(BundleTracker, [{filename: './webpack-stats.json'}])
-
-        config.output
-            .filename('bundle.js')
-
-        config.optimization
-        	.splitChunks(false)
-
-        config.resolve.alias
-            .set('__STATIC__', 'static')
-
+        /*
+        The arrow function in writeToDisk(...) tells the dev server to write
+        only index.html to the disk.
+        The indexPath option (see above) instructs Webpack to also save it to 
+        Django templates folder.
+        We don't need other assets on the disk (CSS, JS...) - the dev server
+        can serve them from memory.
+        See also:
+        https://cli.vuejs.org/config/#indexpath
+        https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
+        */
         config.devServer
-            // the first 3 lines of the following code have been added to the configuration
-            .public('http://127.0.0.1:8080')    
-            .host('127.0.0.1')    
-            .port(8080)
+            .public('http://127.0.0.1:8080')
             .hotOnly(true)
-            .watchOptions({poll: 1000})
-            .https(false)
-            .disableHostCheck(true)
-            .headers({"Access-Control-Allow-Origin": ["\*"]})
-
-    },
-
-    // uncomment before executing 'npm run build' 
-    // css: {
-    //     extract: {
-    //       filename: 'bundle.css',
-    //       chunkFilename: 'bundle.css',
-    //     },
-    // }
-
-};
+            .headers({"Access-Control-Allow-Origin": "*"})
+            .writeToDisk(filePath => filePath.endsWith('index.html'));
+    }
+}
