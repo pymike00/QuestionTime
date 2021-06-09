@@ -1,30 +1,40 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <NavbarComponent/>
   </div>
-  <router-view/>
+  <router-view />
 </template>
 
+<script>
+import { apiService } from "@/common/api.service.js";
+import NavbarComponent from "@/components/Navbar.vue";
+export default {
+  name: "App",
+  components: {
+    NavbarComponent,
+  },
+  methods: {
+    async setUserInfo() {
+      // add the username of the logged in user to localStorage
+      const data = await apiService("/api/user/");
+      const requestUser = data["username"];
+      window.localStorage.setItem("username", requestUser);
+    },
+  },
+  created() {
+    this.setUserInfo();
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+html,
+body {
+  height: 100%;
+  font-family: "Playfair Display", serif;
 }
 
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
+.btn:focus {
+  box-shadow: none !important;
 }
 </style>

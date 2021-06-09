@@ -106,3 +106,4 @@ venv.bak/
 .vscode/
 
 frontend.old/
+QuestionTime/package.json

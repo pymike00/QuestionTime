@@ -1,25 +1,45 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import Home from "../views/Home.vue";
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
-    component: Home
+    path: "/",
+    name: "home",
+    component: Home,
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: "/question/:slug",
+    name: "question",
+    component: () =>
+      import(/* webpackChunkName: "question-page" */ "../views/Question.vue"),
+    props: true
+  },
+  {
+    // the ? sign makes the slug parameter optional
+    path: "/ask/:slug?",
+    name: "question-editor",
+    component: () =>
+      import(/* webpackChunkName: "question-editor" */ "../views/QuestionEditor.vue"),
+    props: true
+  },
+  {
+    path: "/answer/:id",
+    name: "answer-editor",
+    component: () =>
+      import(/* webpackChunkName: "answer-editor" */ "../views/AnswerEditor.vue"),
+    props: true
+  },
+  {
+    path: "/:catchAll(.*)",
+    name: "page-not-found",
+    component:  () =>
+    import(/* webpackChunkName: "not-found" */ "../views/NotFound.vue"),
   }
-]
+];
 
 const router = createRouter({
   history: createWebHistory("/"),
-  routes
-})
+  routes,
+});
 
-export default router
+export default router;
