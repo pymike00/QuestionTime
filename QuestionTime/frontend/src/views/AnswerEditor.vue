@@ -34,23 +34,31 @@ export default {
         return;
       }
       const endpoint = `/api/answers/${this.id}/`;
-      await axios.put(endpoint, { body: this.answerBody });
-      this.$router.push({
-        name: "question",
-        params: { slug: this.questionSlug },
-      });
+      try {
+        await axios.put(endpoint, { body: this.answerBody });
+        this.$router.push({
+          name: "question",
+          params: { slug: this.questionSlug },
+        });
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
   async beforeRouteEnter(to, from, next) {
     // get the answer's data from the REST API and set two data properties for the component
     const endpoint = `/api/answers/${to.params.id}/`;
-    const response = await axios.get(endpoint);
-    return next(
-      (vm) => (
-        (vm.answerBody = response.data.body),
-        (vm.questionSlug = response.data.question_slug)
-      )
-    );
+    try {
+      const response = await axios.get(endpoint);
+      return next(
+        (vm) => (
+          (vm.answerBody = response.data.body),
+          (vm.questionSlug = response.data.question_slug)
+        )
+      );
+    } catch (error) {
+      console.log(error);
+    }
   },
 };
 </script>

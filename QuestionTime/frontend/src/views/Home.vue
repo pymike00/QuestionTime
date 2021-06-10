@@ -49,13 +49,17 @@ export default {
         endpoint = this.next;
       }
       this.loadingQuestions = true;
-      const response = await axios.get(endpoint);
-      this.questions.push(...response.data.results);
-      this.loadingQuestions = false;
-      if (response.data.next) {
-        this.next = response.data.next;
-      } else {
-        this.next = null;
+      try {
+        const response = await axios.get(endpoint);
+        this.questions.push(...response.data.results);
+        this.loadingQuestions = false;
+        if (response.data.next) {
+          this.next = response.data.next;
+        } else {
+          this.next = null;
+        }
+      } catch (error) {
+        console.log(error);
       }
     },
   },
