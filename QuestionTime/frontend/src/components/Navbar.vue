@@ -15,6 +15,7 @@
           <li class="nav-item mx-1">
             <router-link
               :to="{ name: 'question-editor' }"
+              :params="{slug: undefined}"
               class="btn btn-sm btn-danger"
               >Ask Question
             </router-link>
