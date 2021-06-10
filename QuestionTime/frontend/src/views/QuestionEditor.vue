@@ -45,7 +45,7 @@ export default {
       } else {
         let endpoint = "/api/questions/";
         let method = "POST"; 
-        if (this.slug !== undefined) {
+        if (this.slug !== undefined && this.slug !== "") {
           endpoint += `${ this.slug }/`;
           method = "PUT";
         }     
@@ -61,7 +61,7 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     // if the component will be used to update a question, then get the question's data from the REST API
-    if (to.params.slug !== undefined) {
+    if (to.params.slug !== undefined && to.params.slug !== "") {
       let endpoint = `/api/questions/${ to.params.slug }/`;
       let data = await apiService(endpoint);
       return next(vm => (vm.question_body = data.content))
