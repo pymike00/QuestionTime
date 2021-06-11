@@ -13,73 +13,83 @@
       <button
         class="btn btn-sm btn-outline-danger"
         @click="triggerDeleteAnswer"
-        >Delete
+      >
+        Delete
       </button>
     </div>
-    <div v-else>      
+    <div v-else>
       <button
         class="btn btn-sm"
         @click="toggleLike"
         :class="{
           'btn-danger': userLikedAnswer,
-          'btn-outline-danger': !userLikedAnswer
-          }"
-        ><strong>Like [{{ likesCounter }}]</strong>
+          'btn-outline-danger': !userLikedAnswer,
+        }"
+      >
+        <strong>Like [{{ likesCounter }}]</strong>
       </button>
     </div>
-    <hr>
+    <hr />
   </div>
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import { axios } from "@/common/api.service.js";
 export default {
   name: "AnswerComponent",
   props: {
     answer: {
       type: Object,
-      required: true
+      required: true,
     },
     requestUser: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   data() {
     return {
       userLikedAnswer: this.answer.user_has_voted,
-      likesCounter: this.answer.likes_count
-    }
+      likesCounter: this.answer.likes_count,
+    };
   },
   computed: {
     isAnswerAuthor() {
       // return true if the logged in user is also the author of the answer instance
       return this.answer.author === this.requestUser;
-    }
+    },
   },
   methods: {
     toggleLike() {
-      this.userLikedAnswer === false
-        ? this.likeAnswer()
-        : this.unLikeAnswer()
+      this.userLikedAnswer === false ? this.likeAnswer() : this.unLikeAnswer();
     },
-    likeAnswer() {
+    async likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      let endpoint = `/api/answers/${ this.answer.id }/like/`;
-      apiService(endpoint, "POST")
+      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      try {
+        await axios.post(endpoint);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
+      }
     },
-    unLikeAnswer() {
+    async unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      let endpoint = `/api/answers/${ this.answer.id }/like/`;
-      apiService(endpoint, "DELETE")
+      let endpoint = `/api/answers/${this.answer.id}/like/`;
+      try {
+        await axios.delete(endpoint);
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
+      }
     },
     triggerDeleteAnswer() {
       // emit an event to delete an answer instance
-      this.$emit("delete-answer", this.answer)
-    }
-  }
-}
+      this.$emit("delete-answer", this.answer);
+    },
+  },
+};
 </script>
 
