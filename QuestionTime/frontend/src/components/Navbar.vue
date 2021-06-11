@@ -6,7 +6,7 @@
       </router-link>
 
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item active">
             <router-link :to="{ name: 'home' }" class="btn btn-sm btn-success"
               >Home
@@ -15,7 +15,7 @@
           <li class="nav-item mx-1">
             <router-link
               :to="{ name: 'question-editor' }"
-              :params="{slug: undefined}"
+              :params="{ slug: undefined }"
               class="btn btn-sm btn-danger"
               >Ask Question
             </router-link>

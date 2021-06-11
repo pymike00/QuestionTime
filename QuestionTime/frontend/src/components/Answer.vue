@@ -7,7 +7,7 @@
     <div v-if="isAnswerAuthor">
       <router-link
         :to="{ name: 'answer-editor', params: { id: answer.id } }"
-        class="btn btn-sm btn-outline-secondary mr-1"
+        class="btn btn-sm btn-outline-secondary me-1"
         >Edit
       </router-link>
       <button
@@ -18,15 +18,14 @@
       </button>
     </div>
     <div v-else>
-      <button
-        class="btn btn-sm"
+      <button type="button" class="btn btn-sm"
         @click="toggleLike"
         :class="{
-          'btn-danger': userLikedAnswer,
+          'btn-success': userLikedAnswer,
           'btn-outline-danger': !userLikedAnswer,
-        }"
-      >
-        <strong>Like [{{ likesCounter }}]</strong>
+        }">
+        Like Post 
+        <span class="badge bg-danger">{{ likesCounter }}</span>
       </button>
     </div>
     <hr />
@@ -56,7 +55,7 @@ export default {
   computed: {
     isAnswerAuthor() {
       // return true if the logged in user is also the author of the answer instance
-      return this.answer.author === this.requestUser;
+      return false//this.answer.author === this.requestUser;
     },
   },
   methods: {

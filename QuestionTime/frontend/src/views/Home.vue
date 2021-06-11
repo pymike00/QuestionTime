@@ -80,10 +80,10 @@ export default {
 .question-link {
   font-weight: bold;
   color: black;
+  text-decoration: none;
 }
 
 .question-link:hover {
   color: #343a40;
-  text-decoration: none;
 }
 </style>
