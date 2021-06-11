@@ -8,8 +8,7 @@
         placeholder="What do you want to ask?"
         rows="3"
       ></textarea>
-      <br />
-      <button type="submit" class="btn btn-success">Publish</button>
+      <button type="submit" class="btn btn-success mt-3">Publish</button>
     </form>
     <p v-if="error" class="muted mt-2">{{ error }}</p>
   </div>
