@@ -8,69 +8,77 @@
         placeholder="What do you want to ask?"
         rows="3"
       ></textarea>
-      <br>
-      <button
-        type="submit"
-        class="btn btn-success"
-        >Publish
-      </button>
+      <br />
+      <button type="submit" class="btn btn-success">Publish</button>
     </form>
     <p v-if="error" class="muted mt-2">{{ error }}</p>
   </div>
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import { axios } from "@/common/api.service.js";
 export default {
   name: "QuestionEditor",
   props: {
     slug: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
   data() {
     return {
       question_body: null,
-      error: null
-    }
+      error: null,
+    };
   },
   methods: {
+    async performNetworkRequest() {
+      // Tell the REST API to create or update a Question instance;
+      let endpoint = "/api/questions/";
+      let method = "POST";
+      if (this.slug !== undefined && this.slug !== "") {
+        endpoint += `${this.slug}/`;
+        method = "PUT";
+      }
+      const response = await axios({
+        method: method,
+        url: endpoint,
+        data: { content: this.question_body },
+      });
+      this.$router.push({
+        name: "question",
+        params: { slug: response.data.slug },
+      });
+    },
     onSubmit() {
-      // Tell the REST API to create or update a Question Instance
+      // perform basic validation and eventually call this.performNetworkRequest;
       if (!this.question_body) {
         this.error = "You can't send an empty question!";
       } else if (this.question_body.length > 240) {
         this.error = "Ensure this field has no more than 240 characters!";
       } else {
-        let endpoint = "/api/questions/";
-        let method = "POST"; 
-        if (this.slug !== undefined && this.slug !== "") {
-          endpoint += `${ this.slug }/`;
-          method = "PUT";
-        }     
-        apiService(endpoint, method, { content: this.question_body })
-          .then(question_data => {
-            this.$router.push({ 
-              name: 'question', 
-              params: { slug: question_data.slug }
-            })          
-          })  
+        this.performNetworkRequest();
       }
-    }
+    },
   },
   async beforeRouteEnter(to, from, next) {
-    // if the component will be used to update a question, then get the question's data from the REST API
+    // if the component is used to update a question 
+    // get the question's data from the REST API
     if (to.params.slug !== undefined && to.params.slug !== "") {
-      let endpoint = `/api/questions/${ to.params.slug }/`;
-      let data = await apiService(endpoint);
-      return next(vm => (vm.question_body = data.content))
+      const endpoint = `/api/questions/${to.params.slug}/`;
+      try {
+        const response = await axios.get(endpoint);
+        return next((vm) => (vm.question_body = response.data.content));
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
+      }
     } else {
       return next();
-    }   
+    }
   },
   created() {
     document.title = "Editor - QuestionTime";
-  }  
-}
+  },
+};
 </script>
