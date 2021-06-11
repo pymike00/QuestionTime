@@ -59,7 +59,8 @@ export default {
           this.next = null;
         }
       } catch (error) {
-        console.log(error);
+        console.log(error.response);
+        alert(error.response.statusText);
       }
     },
   },
