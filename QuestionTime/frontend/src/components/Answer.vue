@@ -55,7 +55,7 @@ export default {
   computed: {
     isAnswerAuthor() {
       // return true if the logged in user is also the author of the answer instance
-      return false//this.answer.author === this.requestUser;
+      return this.answer.author === this.requestUser;
     },
   },
   methods: {
