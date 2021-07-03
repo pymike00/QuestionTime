@@ -12,25 +12,25 @@
       <div v-if="userHasAnswered">
         <p class="answer-added">You've written an answer!</p>
       </div>
+
+
       <div v-else-if="showForm">
-        <form class="card" @submit.prevent="onSubmit">
-          <div class="card-header px-3">Answer the Question</div>
-          <div class="card-block">
+        <form @submit.prevent="onSubmit">
+          <p>Answer the Question</p>
             <textarea
               v-model="newAnswerBody"
               class="form-control"
               placeholder="Share Your Knowledge!"
               rows="5"
             ></textarea>
-          </div>
-          <div class="card-footer px-3">
-            <button type="submit" class="btn btn-sm btn-success">
+            <button type="submit" class="btn btn-sm btn-success mt-2">
               Submit Your Answer
             </button>
-          </div>
         </form>
         <p v-if="error" class="error mt-2">{{ error }}</p>
       </div>
+
+
       <div v-else>
         <button class="btn btn-sm btn-success" @click="showForm = true">
           Answer the Question
