@@ -2,9 +2,9 @@
   <div class="container mt-2">
     <h1 class="mb-3">Edit Your Answer</h1>
     <form @submit.prevent="onSubmit">
-      <textarea v-model="answerBody" class="form-control" rows="3"></textarea>
+      <textarea v-model="answerBody" class="form-control" rows="5"></textarea>
       <br />
-      <button type="submit" class="btn btn-success">Publish your answer</button>
+      <button type="submit" class="btn btn-sm btn-success">Publish your answer</button>
     </form>
     <p v-if="error" class="muted mt-2">{{ error }}</p>
   </div>

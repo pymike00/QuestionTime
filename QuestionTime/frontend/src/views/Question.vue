@@ -13,7 +13,6 @@
         <p class="answer-added">You've written an answer!</p>
       </div>
 
-
       <div v-else-if="showForm">
         <form @submit.prevent="onSubmit">
           <p>Answer the Question</p>
@@ -29,7 +28,6 @@
         </form>
         <p v-if="error" class="error mt-2">{{ error }}</p>
       </div>
-
 
       <div v-else>
         <button class="btn btn-sm btn-success" @click="showForm = true">
