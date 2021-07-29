@@ -30,13 +30,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-
-    'rest_auth',
-    'rest_auth.registration',
-
     'crispy_forms',
 
     'users',
@@ -138,12 +131,6 @@ AUTH_USER_MODEL = "users.CustomUser"
 # django-crispy-forms
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-# django.contrib.sites
-SITE_ID = 1
-
-# django-allauth
-ACCOUNT_EMAIL_VERIFICATION = "none"
-ACCOUNT_EMAIL_REQUIRED = (True)
 
 # Django-REST-Framework
 REST_FRAMEWORK = {
