@@ -1,4 +1,5 @@
 // Inspired by: https://github.com/EugeneDae/django-vue-cli-webpack-demo
+// Configuration options: https://v4.webpack.js.org/configuration/dev-server/
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '/static/dist/' : 'http://127.0.0.1:8080',
