@@ -8,7 +8,7 @@
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item active">
-            <router-link :to="{ name: 'home' }" class="btn btn-sm btn-success"
+            <router-link :to="{ name: 'home' }" class="btn btn-success"
               >Home
             </router-link>
           </li>
@@ -16,12 +16,12 @@
             <router-link
               :to="{ name: 'question-editor' }"
               :params="{ slug: undefined }"
-              class="btn btn-sm btn-danger"
+              class="btn btn-danger"
               >Ask Question
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="btn btn-sm btn-outline-secondary" href="/accounts/logout/"
+            <a class="btn btn-outline-secondary" href="/accounts/logout/"
               >Logout
             </a>
           </li>
