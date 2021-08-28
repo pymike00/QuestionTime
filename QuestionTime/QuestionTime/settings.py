@@ -29,9 +29,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework.authtoken',
 
-    'crispy_forms',
-    'crispy_bootstrap5',
     'djoser',
+    'widget_tweaks',
 
     'users',
     'questions'
@@ -128,10 +127,6 @@ STATICFILES_DIRS = [
 
 # Custom User Model
 AUTH_USER_MODEL = "users.CustomUser"
-
-# django-crispy-forms
-CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
-CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 
 # Django-REST-Framework
