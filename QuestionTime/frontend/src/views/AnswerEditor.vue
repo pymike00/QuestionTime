@@ -4,7 +4,7 @@
     <form @submit.prevent="onSubmit">
       <textarea v-model="answerBody" class="form-control" rows="5"></textarea>
       <br />
-      <button type="submit" class="btn btn-sm btn-success">Publish your answer</button>
+      <button type="submit" class="btn btn-success">Publish</button>
     </form>
     <p v-if="error" class="muted mt-2">{{ error }}</p>
   </div>
