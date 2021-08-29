@@ -2,19 +2,22 @@
   <div class="home">
     <div class="container mt-2">
       <div v-for="question in questions" :key="question.pk">
-        <p class="mb-0">
-          Posted by:
-          <span class="question-author">{{ question.author }}</span>
-        </p>
-        <h2>
-          <router-link
-            :to="{ name: 'question', params: { slug: question.slug } }"
-            class="question-link"
-            >{{ question.content }}
-          </router-link>
-        </h2>
-        <p>Answers: {{ question.answers_count }}</p>
-        <hr />
+        <div class="card shadow p-2 mb-4 bg-body rounded">
+          <div class="card-body">
+            <p class="mb-0">
+              Posted by:
+              <span class="question-author">{{ question.author }}</span>
+            </p>
+            <h2>
+              <router-link
+                :to="{ name: 'question', params: { slug: question.slug } }"
+                class="question-link"
+                >{{ question.content }}
+              </router-link>
+            </h2>
+            <p class="mb-0">Answers: {{ question.answers_count }}</p>
+          </div>
+        </div>
       </div>
       <div class="my-4">
         <p v-show="loadingQuestions">...loading...</p>
@@ -72,13 +75,17 @@ export default {
 </script>
 
 <style scoped>
+.home {
+  margin-top: 15px;
+}
+
 .question-author {
   font-weight: bold;
   color: #dc3545;
 }
 
 .question-link {
-  font-weight: bold;
+  font-weight: 400;
   color: black;
   text-decoration: none;
 }
