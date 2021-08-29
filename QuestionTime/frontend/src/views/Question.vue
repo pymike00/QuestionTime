@@ -31,7 +31,7 @@
 
       <div v-else>
         <button class="btn btn-success" @click="showForm = true">
-          Answer the Question
+          Answer The Question
         </button>
       </div>
       <hr />
