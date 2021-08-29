@@ -7,11 +7,6 @@
 
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item active">
-            <router-link :to="{ name: 'home' }" class="btn btn-success"
-              >Home
-            </router-link>
-          </li>
           <li class="nav-item mx-1">
             <router-link
               :to="{ name: 'question-editor' }"
