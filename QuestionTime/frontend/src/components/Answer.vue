@@ -18,13 +18,13 @@
       </button>
     </div>
     <div v-else>
-      <button type="button" class="btn btn-sm"
+      <button type="button" class="btn"
         @click="toggleLike"
         :class="{
-          'btn-success': userLikedAnswer,
+          'btn-warning': userLikedAnswer,
           'btn-outline-danger': !userLikedAnswer,
         }">
-        Like Post 
+        Like Answer&nbsp;
         <span class="badge bg-danger">{{ likesCounter }}</span>
       </button>
     </div>
