@@ -1,13 +1,14 @@
 <template>
-  <div class="question-actions">
+  <div class="mt-3">
     <router-link
       :to="{ name: 'question-editor', params: { slug: slug } }"
-      class="btn btn-sm btn-outline-secondary me-1"
+      class="btn btn-sm btn-warning me-1"
       >Edit
     </router-link>
-    <button class="btn btn-sm btn-outline-danger" @click="deleteQuestion">
+    <button class="btn btn-sm btn-danger" @click="deleteQuestion">
       Delete
     </button>
+    <hr />
   </div>
 </template>
 
