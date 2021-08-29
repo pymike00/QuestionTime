@@ -2,35 +2,35 @@
   <div class="single-question mt-2">
     <div v-if="question" class="container">
       <h1>{{ question.content }}</h1>
-      <QuestionActions v-if="isQuestionAuthor" :slug="question.slug" />
       <p class="mb-0">
         Posted by:
         <span class="author-name">{{ question.author }}</span>
       </p>
       <p>{{ question.created_at }}</p>
-      <hr />
+
+      <QuestionActions v-if="isQuestionAuthor" :slug="question.slug" />
+
       <div v-if="userHasAnswered">
         <p class="answer-added">You've written an answer!</p>
       </div>
-
       <div v-else-if="showForm">
         <form @submit.prevent="onSubmit">
           <p>Answer the Question</p>
-            <textarea
-              v-model="newAnswerBody"
-              class="form-control"
-              placeholder="Share Your Knowledge!"
-              rows="5"
-            ></textarea>
-            <button type="submit" class="btn btn-sm btn-success mt-2">
-              Submit Your Answer
-            </button>
+          <textarea
+            v-model="newAnswerBody"
+            class="form-control"
+            placeholder="Share Your Knowledge!"
+            rows="5"
+          ></textarea>
+          <button type="submit" class="btn btn-success mt-2">
+            Submit Your Answer
+          </button>
         </form>
         <p v-if="error" class="error mt-2">{{ error }}</p>
       </div>
 
       <div v-else>
-        <button class="btn btn-sm btn-success" @click="showForm = true">
+        <button class="btn btn-success" @click="showForm = true">
           Answer the Question
         </button>
       </div>
@@ -141,7 +141,7 @@ export default {
       }
     },
     async onSubmit() {
-      // Tell the REST API to create a new answer for this question 
+      // Tell the REST API to create a new answer for this question
       // based on the user input, then update some data properties
       if (!this.newAnswerBody) {
         this.error = "You can't send an empty answer!";
