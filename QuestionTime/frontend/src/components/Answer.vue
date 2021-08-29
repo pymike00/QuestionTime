@@ -7,11 +7,11 @@
     <div v-if="isAnswerAuthor">
       <router-link
         :to="{ name: 'answer-editor', params: { id: answer.id } }"
-        class="btn btn-sm btn-outline-secondary me-1"
+        class="btn btn-sm btn-warning me-1"
         >Edit
       </router-link>
       <button
-        class="btn btn-sm btn-outline-danger"
+        class="btn btn-sm btn-danger"
         @click="triggerDeleteAnswer"
       >
         Delete
