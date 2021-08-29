@@ -33,9 +33,7 @@ export default {
 </script>
 
 <style>
-html,
 body {
-  height: 100%;
   font-family: 'Noto Sans JP', sans-serif;
   font-weight: 300;
 }
