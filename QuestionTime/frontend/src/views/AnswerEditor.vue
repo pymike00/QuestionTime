@@ -2,7 +2,7 @@
   <div class="container mt-2">
     <h1 class="mb-3">Edit Your Answer</h1>
     <form @submit.prevent="onSubmit">
-      <textarea v-model="answerBody" class="form-control" rows="5"></textarea>
+      <textarea v-model="answerBody" class="form-control" rows="10"></textarea>
       <br />
       <button type="submit" class="btn btn-success">Publish</button>
     </form>

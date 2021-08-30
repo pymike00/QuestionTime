@@ -20,9 +20,9 @@
             v-model="newAnswerBody"
             class="form-control"
             placeholder="Share Your Knowledge!"
-            rows="5"
+            rows="10"
           ></textarea>
-          <button type="submit" class="btn btn-success mt-2">
+          <button type="submit" class="btn btn-success my-3">
             Submit Your Answer
           </button>
         </form>
