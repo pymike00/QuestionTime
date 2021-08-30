@@ -86,9 +86,9 @@ class QuestionViewSet(viewsets.ModelViewSet):
     """Provide CRUD +L functionality for Question."""
 
     queryset = Question.objects.all().order_by("-created_at")
-    lookup_field = "slug"
     serializer_class = QuestionSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    lookup_field = "slug"
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
