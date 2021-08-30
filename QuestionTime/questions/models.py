@@ -1,10 +1,10 @@
 from django.db import models
 from django.conf import settings
 
+from core.models import TimeStampedModel
 
-class Question(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+
+class Question(TimeStampedModel):
     content = models.CharField(max_length=240)
     slug = models.SlugField(max_length=255, unique=True)
     author = models.ForeignKey(
@@ -15,9 +15,7 @@ class Question(models.Model):
         return self.content
 
 
-class Answer(models.Model):
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+class Answer(TimeStampedModel):
     body = models.TextField()
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="answers"
