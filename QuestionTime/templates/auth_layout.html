@@ -49,7 +49,9 @@
   <body>
     <div class="position-absolute top-50 start-50 translate-middle">
       <div class="outer-area">
-        <div class="auth-box text-center">{% block auth %}{% endblock %}</div>
+        <div class="auth-box text-center">
+          {% block content %}{% endblock %}
+        </div>
       </div>
     </div>
   </body>

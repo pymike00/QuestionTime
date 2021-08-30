@@ -1,7 +1,7 @@
-{% extends 'auth_layout.html' %}
+{% extends "auth_layout.html" %}
 {% load widget_tweaks %}
 
-{% block auth %}
+{% block content %}
 <h1 class="text-light">QuestionTime</h1>
 <p class="text-light mb-4">Share Your Knowledge!</p>
 <div class="form-container">
@@ -22,7 +22,7 @@
         </div>
 
         {% if form.errors %}
-            <div class="text-danger my-2">
+            <div class="text-danger my-3">
                 {% for error in form.non_field_errors %}
                     {{ error }}
                 {% endfor %}
