@@ -68,8 +68,8 @@ export default {
     },
   },
   created() {
-    this.getQuestions();
     document.title = "QuestionTime";
+    this.getQuestions();
   },
 };
 </script>
