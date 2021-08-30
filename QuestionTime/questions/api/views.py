@@ -12,6 +12,7 @@ from questions.models import Answer, Question
 
 class AnswerCreateAPIView(generics.CreateAPIView):
     """Allow users to answer a question instance if they haven't already."""
+
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
@@ -29,6 +30,7 @@ class AnswerCreateAPIView(generics.CreateAPIView):
 
 class AnswerLikeAPIView(APIView):
     """Allow users to add/remove a like to/from an answer instance."""
+
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
 
@@ -61,6 +63,7 @@ class AnswerLikeAPIView(APIView):
 
 class AnswerListAPIView(generics.ListAPIView):
     """Provide the answers queryset of a specific question instance."""
+
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
 
@@ -71,6 +74,7 @@ class AnswerListAPIView(generics.ListAPIView):
 
 class AnswerRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     """Provide *RUD functionality for an answer instance to it's author."""
+
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
@@ -78,6 +82,7 @@ class AnswerRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
 
 class QuestionViewSet(viewsets.ModelViewSet):
     """Provide CRUD +L functionality for Question."""
+
     queryset = Question.objects.all().order_by("-created_at")
     lookup_field = "slug"
     serializer_class = QuestionSerializer
@@ -85,5 +90,3 @@ class QuestionViewSet(viewsets.ModelViewSet):
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
-
-    
