@@ -6,7 +6,7 @@
     <p style="white-space: pre-wrap;">{{ answer.body }}</p>
     <div v-if="isAnswerAuthor">
       <router-link
-        :to="{ name: 'answer-editor', params: { id: answer.id } }"
+        :to="{ name: 'answer-editor', params: { uuid: answer.uuid } }"
         class="btn btn-sm btn-warning me-1"
         >Edit
       </router-link>
@@ -65,7 +65,7 @@ export default {
     async likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      const endpoint = `/api/answers/${this.answer.id}/like/`;
+      const endpoint = `/api/answers/${this.answer.uuid}/like/`;
       try {
         await axios.post(endpoint);
       } catch (error) {
@@ -76,7 +76,7 @@ export default {
     async unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      const endpoint = `/api/answers/${this.answer.id}/like/`;
+      const endpoint = `/api/answers/${this.answer.uuid}/like/`;
       try {
         await axios.delete(endpoint);
       } catch (error) {

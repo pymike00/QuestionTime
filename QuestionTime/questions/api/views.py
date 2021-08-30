@@ -33,6 +33,7 @@ class AnswerLikeAPIView(APIView):
 
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
+    lookup_field = "uuid"
 
     def delete(self, request, pk):
         """Remove request.user from the voters queryset of an answer instance."""
@@ -78,6 +79,7 @@ class AnswerRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    lookup_field = "uuid"
 
 
 class QuestionViewSet(viewsets.ModelViewSet):
