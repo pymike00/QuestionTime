@@ -1,5 +1,7 @@
-from django.db import models
+import uuid as uuid_lib
+
 from django.conf import settings
+from django.db import models
 
 from core.models import TimeStampedModel
 
@@ -16,6 +18,9 @@ class Question(TimeStampedModel):
 
 
 class Answer(TimeStampedModel):
+    uuid = models.UUIDField(
+        db_index=True, default=uuid_lib.uuid4, editable=False
+    )
     body = models.TextField()
     question = models.ForeignKey(
         Question, on_delete=models.CASCADE, related_name="answers"
