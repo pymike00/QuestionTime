@@ -67,9 +67,9 @@ class AnswerLikeAPIView(APIView):
     permission_classes = [IsAuthenticated]
     lookup_field = "uuid"
 
-    def delete(self, request, pk):
+    def delete(self, request, uuid):
         """Remove request.user from the voters queryset of an answer instance."""
-        answer = get_object_or_404(Answer, pk=pk)
+        answer = get_object_or_404(Answer, uuid=uuid)
         user = request.user
 
         answer.voters.remove(user)
@@ -80,9 +80,9 @@ class AnswerLikeAPIView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, pk):
+    def post(self, request, uuid):
         """Add request.user to the voters queryset of an answer instance."""
-        answer = get_object_or_404(Answer, pk=pk)
+        answer = get_object_or_404(Answer, uuid=uuid)
         user = request.user
 
         answer.voters.add(user)
