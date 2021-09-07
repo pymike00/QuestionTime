@@ -166,7 +166,7 @@ export default {
     },
     async deleteAnswer(answer) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      let endpoint = `/api/answers/${answer.id}/`;
+      let endpoint = `/api/answers/${answer.uuid}/`;
       try {
         await axios.delete(endpoint);
         this.answers.splice(this.answers.indexOf(answer), 1);
