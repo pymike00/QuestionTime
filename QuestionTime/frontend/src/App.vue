@@ -15,9 +15,9 @@ export default {
   },
   methods: {
     async setUserInfo() {
-      // add the username of the logged in user to localStorage
+      // add the username of the current user to localStorage
       try {
-        const response = await axios.get("/api/user/");
+        const response = await axios.get("/auth/users/me/");
         const requestUser = response.data["username"];
         window.localStorage.setItem("username", requestUser);
       } catch (error) {
