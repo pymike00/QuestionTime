@@ -33,7 +33,7 @@ export default {
         this.error = "You can't submit an empty answer!";
         return;
       }
-      const endpoint = `/api/answers/${this.uuid}/`;
+      const endpoint = `/api/v1/answers/${this.uuid}/`;
       try {
         await axios.put(endpoint, { body: this.answerBody });
         this.$router.push({
@@ -48,7 +48,7 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     // get the answer's data from the REST API and set two data properties for the component
-    const endpoint = `/api/answers/${to.params.uuid}/`;
+    const endpoint = `/api/v1/answers/${to.params.uuid}/`;
     try {
       const response = await axios.get(endpoint);
       return next(

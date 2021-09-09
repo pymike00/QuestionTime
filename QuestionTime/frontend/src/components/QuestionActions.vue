@@ -24,7 +24,7 @@ export default {
   },
   methods: {
     async deleteQuestion() {
-      const endpoint = `/api/questions/${this.slug}/`;
+      const endpoint = `/api/v1/questions/${this.slug}/`;
       try {
         await axios.delete(endpoint);
         this.$router.push({

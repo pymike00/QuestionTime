@@ -47,7 +47,7 @@ export default {
   methods: {
     async getQuestions() {
       // make a GET Request to the questions list endpoint and populate the questions array
-      let endpoint = "/api/questions/";
+      let endpoint = "/api/v1/questions/";
       if (this.next) {
         endpoint = this.next;
       }

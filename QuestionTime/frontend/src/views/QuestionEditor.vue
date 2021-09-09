@@ -33,7 +33,7 @@ export default {
   methods: {
     async performNetworkRequest() {
       // Tell the REST API to create or update a Question instance;
-      let endpoint = "/api/questions/";
+      let endpoint = "/api/v1/questions/";
       let method = "POST";
       if (this.slug !== undefined && this.slug !== "") {
         endpoint += `${this.slug}/`;
@@ -64,7 +64,7 @@ export default {
     // if the component is used to update a question 
     // get the question's data from the REST API
     if (to.params.slug !== undefined && to.params.slug !== "") {
-      const endpoint = `/api/questions/${to.params.slug}/`;
+      const endpoint = `/api/v1/questions/${to.params.slug}/`;
       try {
         const response = await axios.get(endpoint);
         return next((vm) => (vm.question_body = response.data.content));

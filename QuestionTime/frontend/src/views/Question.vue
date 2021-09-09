@@ -107,7 +107,7 @@ export default {
     },
     async getQuestionData() {
       // get the details of a question instance from the REST API and call setPageTitle
-      let endpoint = `/api/questions/${this.slug}/`;
+      let endpoint = `/api/v1/questions/${this.slug}/`;
       try {
         const response = await axios.get(endpoint);
         this.question = response.data;
@@ -121,7 +121,7 @@ export default {
     },
     async getQuestionAnswers() {
       // get a page of answers for a single question from the REST API's paginated 'Questions Endpoint'
-      let endpoint = `/api/questions/${this.slug}/answers/`;
+      let endpoint = `/api/v1/questions/${this.slug}/answers/`;
       if (this.next) {
         endpoint = this.next;
       }
@@ -147,7 +147,7 @@ export default {
         this.error = "You can't send an empty answer!";
         return;
       }
-      const endpoint = `/api/questions/${this.slug}/answer/`;
+      const endpoint = `/api/v1/questions/${this.slug}/answer/`;
       try {
         const response = await axios.post(endpoint, {
           body: this.newAnswerBody,
@@ -166,7 +166,7 @@ export default {
     },
     async deleteAnswer(answer) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      let endpoint = `/api/answers/${answer.uuid}/`;
+      let endpoint = `/api/v1/answers/${answer.uuid}/`;
       try {
         await axios.delete(endpoint);
         this.answers.splice(this.answers.indexOf(answer), 1);

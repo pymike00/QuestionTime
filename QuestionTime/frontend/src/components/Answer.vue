@@ -65,7 +65,7 @@ export default {
     async likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      const endpoint = `/api/answers/${this.answer.uuid}/like/`;
+      const endpoint = `/api/v1/answers/${this.answer.uuid}/like/`;
       try {
         await axios.post(endpoint);
       } catch (error) {
@@ -76,7 +76,7 @@ export default {
     async unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      const endpoint = `/api/answers/${this.answer.uuid}/like/`;
+      const endpoint = `/api/v1/answers/${this.answer.uuid}/like/`;
       try {
         await axios.delete(endpoint);
       } catch (error) {
