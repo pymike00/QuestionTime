@@ -36,11 +36,6 @@ Content-Type: application/json
 POST {{host}}/auth/token/logout/
 Authorization: Token {{token}}
 
-{
-    "username": "{{username}}",
-    "password": "{{password}}"
-}
-
 
 ### Create new question
 POST {{host}}/auth/token/logout/
