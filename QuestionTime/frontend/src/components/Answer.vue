@@ -48,7 +48,7 @@ export default {
   },
   data() {
     return {
-      userLikedAnswer: this.answer.user_has_voted,
+      userLikedAnswer: this.answer.user_has_liked_answer,
       likesCounter: this.answer.likes_count,
     };
   },
