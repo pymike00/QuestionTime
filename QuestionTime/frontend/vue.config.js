@@ -1,23 +1,23 @@
-// Inspired by: https://github.com/EugeneDae/django-vue-cli-webpack-demo
-// Configuration options: https://v4.webpack.js.org/configuration/dev-server/
+/*
+Configuration made popular by Ejez and EugeneDae.
+See:
+https://github.com/django-webpack/django-webpack-loader/issues/209#issue-512863855
+https://github.com/EugeneDae/django-vue-cli-webpack-demo
+
+Settings Options:
+https://cli.vuejs.org/config/
+https://v4.webpack.js.org/configuration/dev-server/
+
+Please remember you will also need to properly configure your Django backend
+for this setup to work as expected both in development and production.
+*/
 
 module.exports = {
     publicPath: process.env.NODE_ENV === 'production' ? '/static/dist/' : 'http://127.0.0.1:8080',
     outputDir: '../static/dist',
-    indexPath: '../../templates/index.html', // relative to outputDir!
+    indexPath: '../../templates/index.html',
 
     chainWebpack: config => {
-        /*
-        The arrow function in writeToDisk(...) tells the dev server to write
-        only index.html to the disk.
-        The indexPath option (see above) instructs Webpack to also save it to 
-        Django templates folder.
-        We don't need other assets on the disk (CSS, JS...) - the dev server
-        can serve them from memory.
-        See also:
-        https://cli.vuejs.org/config/#indexpath
-        https://webpack.js.org/configuration/dev-server/#devserverwritetodisk-
-        */
         config.devServer
             .public('http://127.0.0.1:8080')
             .hotOnly(true)
