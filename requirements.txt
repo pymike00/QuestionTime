@@ -3,7 +3,7 @@ certifi==2019.11.28
 chardet==3.0.4
 confusable-homoglyphs==3.2.0
 defusedxml==0.6.0
-Django==3.0.8
+Django==3.1.13
 django-allauth==0.42.0
 django-crispy-forms==1.9.2
 django-registration==3.1
