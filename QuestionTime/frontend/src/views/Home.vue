@@ -1,34 +1,32 @@
 <template>
-  <div class="home">
-    <div class="container mt-2">
-      <div v-for="question in questions" :key="question.pk">
-        <div class="card shadow p-2 mb-4 bg-body rounded">
-          <div class="card-body">
-            <p class="mb-0">
-              Posted by:
-              <span class="question-author">{{ question.author }}</span>
-            </p>
-            <h2>
-              <router-link
-                :to="{ name: 'question', params: { slug: question.slug } }"
-                class="question-link"
-                >{{ question.content }}
-              </router-link>
-            </h2>
-            <p class="mb-0">Answers: {{ question.answers_count }}</p>
-          </div>
+  <div class="container mt-3">
+    <div v-for="question in questions" :key="question.pk">
+      <div class="card shadow p-2 mb-4 bg-body rounded">
+        <div class="card-body">
+          <p class="mb-0">
+            Posted by:
+            <span class="question-author">{{ question.author }}</span>
+          </p>
+          <h2>
+            <router-link
+              :to="{ name: 'question', params: { slug: question.slug } }"
+              class="question-link"
+              >{{ question.content }}
+            </router-link>
+          </h2>
+          <p class="mb-0">Answers: {{ question.answers_count }}</p>
         </div>
       </div>
-      <div class="my-4">
-        <p v-show="loadingQuestions">...loading...</p>
-        <button
-          v-show="next"
-          @click="getQuestions"
-          class="btn btn-sm btn-outline-success"
-        >
-          Load More
-        </button>
-      </div>
+    </div>
+    <div class="my-4">
+      <p v-show="loadingQuestions">...loading...</p>
+      <button
+        v-show="next"
+        @click="getQuestions"
+        class="btn btn-sm btn-outline-success"
+      >
+        Load More
+      </button>
     </div>
   </div>
 </template>
@@ -75,10 +73,6 @@ export default {
 </script>
 
 <style scoped>
-.home {
-  margin-top: 15px;
-}
-
 .question-author {
   font-weight: bold;
   color: #dc3545;
