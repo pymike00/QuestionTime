@@ -139,6 +139,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',
     ),
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 6 # 10 could be a good value to assign in production. Remember: this currently also applies to answers
+    'DEFAULT_PAGINATION_CLASS': 'core.pagination.PageNumberPaginationNoCount',
+    'PAGE_SIZE': 5
 }
