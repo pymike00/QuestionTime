@@ -1,6 +1,6 @@
 <template>
   <div class="container mt-3">
-    <div v-for="question in questions" :key="question.pk">
+    <div v-for="question in questions" :key="question.uuid">
       <div class="card shadow p-2 mb-4 bg-body rounded">
         <div class="card-body">
           <p class="mb-0">

@@ -44,7 +44,7 @@
         v-for="answer in answers"
         :answer="answer"
         :requestUser="requestUser"
-        :key="answer.id"
+        :key="answer.uuid"
         @delete-answer="deleteAnswer"
       />
       <div class="my-4">
