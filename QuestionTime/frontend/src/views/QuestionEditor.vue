@@ -3,7 +3,7 @@
     <h1 class="mb-3">Ask a Question</h1>
     <form @submit.prevent="onSubmit">
       <textarea
-        v-model="question_body"
+        v-model="questionBody"
         class="form-control"
         placeholder="What do you want to ask?"
         rows="3"
@@ -26,7 +26,7 @@ export default {
   },
   data() {
     return {
-      question_body: null,
+      questionBody: null,
       error: null,
     };
   },
@@ -43,7 +43,7 @@ export default {
         const response = await axios({
           method: method,
           url: endpoint,
-          data: { content: this.question_body },
+          data: { content: this.questionBody },
         });
         this.$router.push({
           name: "question",
@@ -55,9 +55,9 @@ export default {
     },
     onSubmit() {
       // perform basic validation and eventually call this.performNetworkRequest;
-      if (!this.question_body) {
+      if (!this.questionBody) {
         this.error = "You can't send an empty question!";
-      } else if (this.question_body.length > 240) {
+      } else if (this.questionBody.length > 240) {
         this.error = "Ensure this field has no more than 240 characters!";
       } else {
         this.performNetworkRequest();
@@ -71,7 +71,7 @@ export default {
       const endpoint = `/api/v1/questions/${to.params.slug}/`;
       try {
         const response = await axios.get(endpoint);
-        return next((vm) => (vm.question_body = response.data.content));
+        return next((vm) => (vm.questionBody = response.data.content));
       } catch (error) {
         console.log(error.response);
         alert(error.response.statusText);
