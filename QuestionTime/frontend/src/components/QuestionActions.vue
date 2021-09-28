@@ -2,11 +2,21 @@
   <div class="mt-3">
     <router-link
       :to="{ name: 'question-editor', params: { slug: slug } }"
-      class="btn btn-sm btn-warning me-1"
+      class="btn btn-sm btn-warning"
       >Edit
     </router-link>
-    <button class="btn btn-sm btn-danger" @click="deleteQuestion">
+    <button
+      class="btn btn-sm btn-danger mx-1"
+      @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn"
+    >
       Delete
+    </button>
+    <button
+      v-show="showDeleteConfirmationBtn"
+      class="btn btn-sm btn-outline-danger"
+      @click="deleteQuestion"
+    >
+      Yes, delete my question!
     </button>
     <hr />
   </div>
@@ -21,6 +31,11 @@ export default {
       type: String,
       required: true,
     },
+  },
+  data() {
+    return {
+      showDeleteConfirmationBtn: false,
+    };
   },
   methods: {
     async deleteQuestion() {
