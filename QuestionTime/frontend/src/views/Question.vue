@@ -107,7 +107,7 @@ export default {
     },
     async getQuestionData() {
       // get the details of a question instance from the REST API and call setPageTitle
-      let endpoint = `/api/v1/questions/${this.slug}/`;
+      const endpoint = `/api/v1/questions/${this.slug}/`;
       try {
         const response = await axios.get(endpoint);
         this.question = response.data;
@@ -166,7 +166,7 @@ export default {
     },
     async deleteAnswer(answer) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      let endpoint = `/api/v1/answers/${answer.uuid}/`;
+      const endpoint = `/api/v1/answers/${answer.uuid}/`;
       try {
         await axios.delete(endpoint);
         this.answers.splice(this.answers.indexOf(answer), 1);
