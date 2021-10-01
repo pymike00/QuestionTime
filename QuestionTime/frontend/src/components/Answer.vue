@@ -11,10 +11,17 @@
         >Edit
       </router-link>
       <button
-        class="btn btn-sm btn-danger"
-        @click="triggerDeleteAnswer"
+        class="btn btn-sm btn-danger mx-1"
+        @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn"
       >
         Delete
+      </button>
+      <button
+        v-show="showDeleteConfirmationBtn"
+        class="btn btn-sm btn-outline-danger"
+        @click="triggerDeleteAnswer"
+      >
+        Yes, delete my answer!
       </button>
     </div>
     <div v-else>
@@ -48,6 +55,7 @@ export default {
   },
   data() {
     return {
+      showDeleteConfirmationBtn: false,
       userLikedAnswer: this.answer.user_has_liked_answer,
       likesCounter: this.answer.likes_count,
     };
