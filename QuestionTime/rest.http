@@ -1,0 +1,53 @@
+# To be used with the "REST Client" VS Code extension by Huachao Mao
+# https://marketplace.visualstudio.com/items?itemName=humao.rest-client
+
+
+### Variables
+@host=http://127.0.0.1:8000
+@username=neo
+@email=neo@the.matrix
+@password=always-use-strong-passwords-in-production
+@token=just-login-to-get-one
+
+
+### Create new account
+POST {{host}}/auth/users/
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "email": "{{email}}",
+    "password": "{{password}}",
+    "re_password": "{{password}}"
+}
+
+
+### Login
+POST {{host}}/auth/token/login/
+Content-Type: application/json
+
+{
+    "username": "{{username}}",
+    "password": "{{password}}"
+}
+
+
+### Logout
+POST {{host}}/auth/token/logout/
+Authorization: Token {{token}}
+
+
+### Create new question
+POST {{host}}/auth/token/logout/
+Content-Type: application/json
+Authorization: Token {{token}}
+
+{
+    "content": "Is this question the best test one ever asked!?"
+}
+
+
+### Get question list
+GET {{host}}/api/questions/
+Authorization: Token {{token}}
+

@@ -1,9 +1,7 @@
 <template>
-  <div class="not-found">
-    <div class="container mt-3">
-      <h1 id="notfound">{{ message }}</h1>
-    </div>
-  </div>  
+  <div class="container mt-3">
+    <h1 class="not-found">{{ message }}</h1>
+  </div>
 </template>
 
 <script>
@@ -11,17 +9,19 @@ export default {
   name: "NotFound",
   data() {
     return {
-      message: "404 - Page Not Found"
-    }
+      message: "404 - Not Found",
+    };
+  },
+  created() {
+    document.title = this.message;
   }
-}
+};
 </script>
 
-<style scoped>
-#notfound {
+<style>
+.not-found {
   color: red;
   text-align: center;
 }
 </style>
-
 

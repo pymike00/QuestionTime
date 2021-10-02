@@ -1,40 +1,56 @@
 <template>
-  <div class="question-actions">
+  <div class="mt-3">
     <router-link
-      :to="{name: 'question-editor', params: {slug: slug}}"
-      class="btn btn-sm btn-outline-secondary mr-1"
+      :to="{ name: 'question-editor', params: { slug: slug } }"
+      class="btn btn-sm btn-warning"
       >Edit
     </router-link>
     <button
+      class="btn btn-sm btn-danger mx-1"
+      @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn"
+    >
+      Delete
+    </button>
+    <button
+      v-show="showDeleteConfirmationBtn"
       class="btn btn-sm btn-outline-danger"
       @click="deleteQuestion"
-      >Delete
+    >
+      Yes, delete my question!
     </button>
-  </div>  
+    <hr />
+  </div>
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import { axios } from "@/common/api.service.js";
 export default {
   name: "QuestionActions",
   props: {
     slug: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
+  },
+  data() {
+    return {
+      showDeleteConfirmationBtn: false,
+    };
   },
   methods: {
     async deleteQuestion() {
-      let endpoint = `/api/questions/${this.slug}/`;
+      const endpoint = `/api/v1/questions/${this.slug}/`;
       try {
-        await apiService(endpoint, "DELETE");
-        this.$router.push("/");
+        await axios.delete(endpoint);
+        this.$router.push({
+          name: "home",
+        });
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
       }
-      catch (err) {
-        console.log(err);
-      }
-    }
-  }
-}
+    },
+  },
+};
 </script>
 

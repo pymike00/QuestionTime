@@ -104,3 +104,6 @@ venv.bak/
 .mypy_cache/
 
 .vscode/
+
+QuestionTime/package.json
+QuestionTime/templates/index.html

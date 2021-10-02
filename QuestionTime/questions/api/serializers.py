@@ -1,17 +1,18 @@
 from rest_framework import serializers
+
 from questions.models import Answer, Question
 
 
 class AnswerSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = serializers.StringRelatedField()
     created_at = serializers.SerializerMethodField()
     likes_count = serializers.SerializerMethodField()
-    user_has_voted = serializers.SerializerMethodField()
+    user_has_liked_answer = serializers.SerializerMethodField()
     question_slug = serializers.SerializerMethodField()
 
     class Meta:
         model = Answer
-        exclude = ["question", "voters", "updated_at"]
+        exclude = ["id", "question", "voters", "updated_at"]
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")
@@ -19,7 +20,7 @@ class AnswerSerializer(serializers.ModelSerializer):
     def get_likes_count(self, instance):
         return instance.voters.count()
 
-    def get_user_has_voted(self, instance):
+    def get_user_has_liked_answer(self, instance):
         request = self.context.get("request")
         return instance.voters.filter(pk=request.user.pk).exists()
 
@@ -28,7 +29,7 @@ class AnswerSerializer(serializers.ModelSerializer):
 
 
 class QuestionSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = serializers.StringRelatedField()
     created_at = serializers.SerializerMethodField()
     slug = serializers.SlugField(read_only=True)
     answers_count = serializers.SerializerMethodField()
@@ -36,7 +37,7 @@ class QuestionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Question
-        exclude = ["updated_at"]
+        exclude = ["id", "updated_at"]
 
     def get_created_at(self, instance):
         return instance.created_at.strftime("%B %d, %Y")

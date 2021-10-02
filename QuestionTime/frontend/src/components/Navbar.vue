@@ -1,30 +1,22 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light my-navbar">
     <div class="container">
-      <router-link 
-        :to="{ name: 'home' }" 
-        class="navbar-brand"
+      <router-link :to="{ name: 'home' }" class="navbar-brand"
         >QuestionTime
       </router-link>
 
       <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <router-link
-              :to="{ name: 'home' }" 
-              class="btn btn-sm btn-success"
-              >Home
-            </router-link>
-          </li>
+        <ul class="navbar-nav ms-auto">
           <li class="nav-item mx-1">
-            <router-link 
-              :to="{ name: 'question-editor' }" 
-              class="btn btn-sm btn-danger"
+            <router-link
+              :to="{ name: 'question-editor' }"
+              :params="{ slug: undefined }"
+              class="btn btn-danger"
               >Ask Question
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="btn btn-sm btn-outline-secondary" href="/accounts/logout/"
+            <a class="btn btn-outline-secondary" href="/accounts/logout/"
               >Logout
             </a>
           </li>
@@ -36,7 +28,7 @@
 
 <script>
 export default {
-  name: "NavbarComponent"
+  name: "NavbarComponent",
 };
 </script>
 
@@ -47,7 +39,7 @@ export default {
 
 .navbar-brand {
   font-weight: bold;
-  font-size: 130%;
+  font-size: 150%;
 }
 
 .navbar-brand:hover {

@@ -2,55 +2,49 @@
   <div class="single-question mt-2">
     <div v-if="question" class="container">
       <h1>{{ question.content }}</h1>
-      <QuestionActions
-        v-if="isQuestionAuthor"
-        :slug="question.slug"
-      />
-      <p class="mb-0">Posted by:
+      <p class="mb-0">
+        Posted by:
         <span class="author-name">{{ question.author }}</span>
       </p>
       <p>{{ question.created_at }}</p>
-      <hr>
+
+      <QuestionActions v-if="isQuestionAuthor" :slug="question.slug" />
+
       <div v-if="userHasAnswered">
         <p class="answer-added">You've written an answer!</p>
       </div>
       <div v-else-if="showForm">
-        <form class="card" @submit.prevent="onSubmit">
-          <div class="card-header px-3">
-            Answer the Question
-          </div>
-          <div class="card-block">
-            <textarea 
-              v-model="newAnswerBody"
-              class="form-control"
-              placeholder="Share Your Knowledge!"
-              rows="5"
-            ></textarea>
-          </div>
-          <div class="card-footer px-3">
-            <button type="submit" class="btn btn-sm btn-success">Submit Your Answer</button>
-          </div>
+        <form @submit.prevent="onSubmit">
+          <p>Answer the Question</p>
+          <textarea
+            v-model="newAnswerBody"
+            class="form-control"
+            placeholder="Share Your Knowledge!"
+            rows="10"
+          ></textarea>
+          <button type="submit" class="btn btn-success my-3">
+            Submit Your Answer
+          </button>
         </form>
         <p v-if="error" class="error mt-2">{{ error }}</p>
       </div>
+
       <div v-else>
-        <button
-          class="btn btn-sm btn-success"
-          @click="showForm = true"
-          >Answer the Question
+        <button class="btn btn-success" @click="showForm = true">
+          Answer The Question
         </button>
       </div>
-      <hr>
+      <hr />
     </div>
     <div v-else>
       <h1 class="error text-center">404 - Question Not Found</h1>
     </div>
     <div v-if="question" class="container">
-      <AnswerComponent 
+      <AnswerComponent
         v-for="answer in answers"
         :answer="answer"
         :requestUser="requestUser"
-        :key="answer.id"
+        :key="answer.uuid"
         @delete-answer="deleteAnswer"
       />
       <div class="my-4">
@@ -59,7 +53,8 @@
           v-show="next"
           @click="getQuestionAnswers"
           class="btn btn-sm btn-outline-success"
-          >Load More
+        >
+          Load More
         </button>
       </div>
     </div>
@@ -67,7 +62,7 @@
 </template>
 
 <script>
-import { apiService } from "@/common/api.service.js";
+import { axios } from "@/common/api.service.js";
 import AnswerComponent from "@/components/Answer.vue";
 import QuestionActions from "@/components/QuestionActions.vue";
 export default {
@@ -75,12 +70,12 @@ export default {
   props: {
     slug: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   components: {
     AnswerComponent,
-    QuestionActions
+    QuestionActions,
   },
   data() {
     return {
@@ -92,14 +87,14 @@ export default {
       error: null,
       userHasAnswered: false,
       showForm: false,
-      requestUser: null
-    }
+      requestUser: null,
+    };
   },
   computed: {
     isQuestionAuthor() {
       // return true if the logged in user is also the author of the question instance
       return this.question.author === this.requestUser;
-    }
+    },
   },
   methods: {
     setPageTitle(title) {
@@ -110,83 +105,90 @@ export default {
       // the username has been set to localStorage by the App.vue component
       this.requestUser = window.localStorage.getItem("username");
     },
-    getQuestionData() {
+    async getQuestionData() {
       // get the details of a question instance from the REST API and call setPageTitle
-      let endpoint = `/api/questions/${this.slug}/`;
-      apiService(endpoint)
-        .then(data => {
-          if (data) {
-            this.question = data;
-            this.userHasAnswered = data.user_has_answered;
-            this.setPageTitle(data.content)
-          } else {
-            this.question = null;
-            this.setPageTitle("404 - Page Not Found")
-          }
-
-        })
+      const endpoint = `/api/v1/questions/${this.slug}/`;
+      try {
+        const response = await axios.get(endpoint);
+        this.question = response.data;
+        this.userHasAnswered = response.data.user_has_answered;
+        this.setPageTitle(response.data.content);
+      } catch (error) {
+        console.log(error.response);
+        this.question = null;
+        this.setPageTitle(error.response.statusText);
+      }
     },
-    getQuestionAnswers() {
+    async getQuestionAnswers() {
       // get a page of answers for a single question from the REST API's paginated 'Questions Endpoint'
-      let endpoint = `/api/questions/${this.slug}/answers/`;
+      let endpoint = `/api/v1/questions/${this.slug}/answers/`;
       if (this.next) {
         endpoint = this.next;
       }
       this.loadingAnswers = true;
-      apiService(endpoint)
-        .then(data => {
-          this.answers.push(...data.results);
-          this.loadingAnswers = false;
-          if (data.next) {
-            this.next = data.next;
-          } else {
-            this.next = null;
-          }
-        })
+      try {
+        const response = await axios.get(endpoint);
+        this.answers.push(...response.data.results);
+        this.loadingAnswers = false;
+        if (response.data.next) {
+          this.next = response.data.next;
+        } else {
+          this.next = null;
+        }
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
+      }
     },
-    onSubmit() {
-      // Tell the REST API to create a new answer for this question based on the user input, then update some data properties
-      if (this.newAnswerBody) {
-        let endpoint = `/api/questions/${this.slug}/answer/`;
-        apiService(endpoint, "POST", { body: this.newAnswerBody })
-          .then(data => {
-            this.answers.unshift(data)
-          })
+    async onSubmit() {
+      // Tell the REST API to create a new answer for this question
+      // based on the user input, then update some data properties
+      if (!this.newAnswerBody) {
+        this.error = "You can't send an empty answer!";
+        return;
+      }
+      const endpoint = `/api/v1/questions/${this.slug}/answer/`;
+      try {
+        const response = await axios.post(endpoint, {
+          body: this.newAnswerBody,
+        });
+        this.answers.unshift(response.data);
         this.newAnswerBody = null;
         this.showForm = false;
         this.userHasAnswered = true;
         if (this.error) {
           this.error = null;
         }
-      } else {
-        this.error = "You can't send an empty answer!";
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
       }
     },
     async deleteAnswer(answer) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      let endpoint = `/api/answers/${answer.id}/`;
+      const endpoint = `/api/v1/answers/${answer.uuid}/`;
       try {
-        await apiService(endpoint, "DELETE")
-        this.$delete(this.answers, this.answers.indexOf(answer))
+        await axios.delete(endpoint);
+        this.answers.splice(this.answers.indexOf(answer), 1);
         this.userHasAnswered = false;
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
       }
-      catch (err) {
-        console.log(err)
-      }
-    }
+    },
   },
   created() {
-    this.getQuestionData()
-    this.getQuestionAnswers()
-    this.setRequestUser()
-  }
-}
+    this.getQuestionData();
+    this.getQuestionAnswers();
+    this.setRequestUser();
+  },
+};
 </script>
 
 <style scoped>
 .author-name {
   font-weight: bold;
-  color: #DC3545;
+  color: #dc3545;
 }
 
 .answer-added {
@@ -196,6 +198,6 @@ export default {
 
 .error {
   font-weight: bold;
-  color: red; 
+  color: red;
 }
 </style>

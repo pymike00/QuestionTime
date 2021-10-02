@@ -10,8 +10,21 @@ from questions.api.serializers import AnswerSerializer, QuestionSerializer
 from questions.models import Answer, Question
 
 
+class QuestionViewSet(viewsets.ModelViewSet):
+    """Provide CRUD +L functionality for Question."""
+
+    queryset = Question.objects.all().order_by("-created_at")
+    serializer_class = QuestionSerializer
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    lookup_field = "slug"
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
+
 class AnswerCreateAPIView(generics.CreateAPIView):
     """Allow users to answer a question instance if they haven't already."""
+
     queryset = Answer.objects.all()
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
@@ -27,14 +40,36 @@ class AnswerCreateAPIView(generics.CreateAPIView):
         serializer.save(author=request_user, question=question)
 
 
-class AnswerLikeAPIView(APIView):
-    """Allow users to add/remove a like to/from an answer instance."""
+class AnswerRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
+    """Provide *RUD functionality for an answer instance to it's author."""
+
+    queryset = Answer.objects.all()
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
+    lookup_field = "uuid"
+
+
+class AnswerListAPIView(generics.ListAPIView):
+    """Provide the answers queryset of a specific question instance."""
+
     serializer_class = AnswerSerializer
     permission_classes = [IsAuthenticated]
 
-    def delete(self, request, pk):
+    def get_queryset(self):
+        kwarg_slug = self.kwargs.get("slug")
+        return Answer.objects.filter(question__slug=kwarg_slug).order_by("-created_at")
+
+
+class AnswerLikeAPIView(APIView):
+    """Allow users to add/remove a like to/from an answer instance."""
+
+    serializer_class = AnswerSerializer
+    permission_classes = [IsAuthenticated]
+    lookup_field = "uuid"
+
+    def delete(self, request, uuid):
         """Remove request.user from the voters queryset of an answer instance."""
-        answer = get_object_or_404(Answer, pk=pk)
+        answer = get_object_or_404(Answer, uuid=uuid)
         user = request.user
 
         answer.voters.remove(user)
@@ -45,9 +80,9 @@ class AnswerLikeAPIView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    def post(self, request, pk):
+    def post(self, request, uuid):
         """Add request.user to the voters queryset of an answer instance."""
-        answer = get_object_or_404(Answer, pk=pk)
+        answer = get_object_or_404(Answer, uuid=uuid)
         user = request.user
 
         answer.voters.add(user)
@@ -57,33 +92,3 @@ class AnswerLikeAPIView(APIView):
         serializer = self.serializer_class(answer, context=serializer_context)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
-
-
-class AnswerListAPIView(generics.ListAPIView):
-    """Provide the answers queryset of a specific question instance."""
-    serializer_class = AnswerSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get_queryset(self):
-        kwarg_slug = self.kwargs.get("slug")
-        return Answer.objects.filter(question__slug=kwarg_slug).order_by("-created_at")
-
-
-class AnswerRUDAPIView(generics.RetrieveUpdateDestroyAPIView):
-    """Provide *RUD functionality for an answer instance to it's author."""
-    queryset = Answer.objects.all()
-    serializer_class = AnswerSerializer
-    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
-
-
-class QuestionViewSet(viewsets.ModelViewSet):
-    """Provide CRUD +L functionality for Question."""
-    queryset = Question.objects.all().order_by("-created_at")
-    lookup_field = "slug"
-    serializer_class = QuestionSerializer
-    permission_classes = [IsAuthenticated, IsAuthorOrReadOnly]
-
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user)
-
-    
