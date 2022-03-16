@@ -14,23 +14,28 @@ backend for this setup to work as expected both in development and production.
 Settings Options:
 https://cli.vuejs.org/config/
 https://v4.webpack.js.org/configuration/dev-server/
+https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md
 */
 
 module.exports = {
-    publicPath: process.env.NODE_ENV === 'production' ? '/static/dist/' : 'http://127.0.0.1:8080',
-    outputDir: '../static/dist',
-    indexPath: '../../templates/index.html',
-    pages: {
-      index: {
-        entry: 'src/main.js',
-        title: 'QuestionTime',
-      },
+  publicPath:
+    process.env.NODE_ENV === "production"
+      ? "/static/dist/"
+      : "http://127.0.0.1:8080",
+  outputDir: "../static/dist",
+  indexPath: "../../templates/index.html",
+  pages: {
+    index: {
+      entry: "src/main.js",
+      title: "QuestionTime",
     },
-    chainWebpack: config => {
-        config.devServer
-            .public('http://127.0.0.1:8080')
-            .hotOnly(true)
-            .headers({"Access-Control-Allow-Origin": "*"})
-            .writeToDisk(filePath => filePath.endsWith('index.html'));
-    }
-}
+  },
+  devServer: {
+    devMiddleware: {
+      publicPath: "http://127.0.0.1:8080",
+      writeToDisk: (filePath) => filePath.endsWith("index.html"),
+    },
+    hot: "only",
+    headers: { "Access-Control-Allow-Origin": "*" },
+  },
+};
