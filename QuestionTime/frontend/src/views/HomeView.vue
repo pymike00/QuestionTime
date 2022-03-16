@@ -34,7 +34,7 @@
 <script>
 import { axios } from "@/common/api.service.js";
 export default {
-  name: "home",
+  name: "home-view",
   data() {
     return {
       questions: [],

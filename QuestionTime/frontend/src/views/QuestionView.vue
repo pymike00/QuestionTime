@@ -66,7 +66,7 @@ import { axios } from "@/common/api.service.js";
 import AnswerComponent from "@/components/Answer.vue";
 import QuestionActions from "@/components/QuestionActions.vue";
 export default {
-  name: "Question",
+  name: "QuestionView",
   props: {
     slug: {
       type: String,
