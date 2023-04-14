@@ -38,7 +38,7 @@ Authorization: Token {{token}}
 
 
 ### Create new question
-POST {{host}}/auth/token/logout/
+POST {{host}}/api/v1/questions/
 Content-Type: application/json
 Authorization: Token {{token}}
 
@@ -48,6 +48,6 @@ Authorization: Token {{token}}
 
 
 ### Get question list
-GET {{host}}/api/questions/
+GET {{host}}/api/v1/questions/
 Authorization: Token {{token}}
 
