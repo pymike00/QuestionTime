@@ -67,6 +67,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'QuestionTime.wsgi.application'
 
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
