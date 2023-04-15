@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_registration",
     "djoser",
+    "core",
     "questions",
     "users",
 ]
@@ -49,7 +50,7 @@ ROOT_URLCONF = "QuestionTime.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -138,3 +139,39 @@ REST_FRAMEWORK = {
     "DEFAULT_PAGINATION_CLASS": "core.pagination.PageNumberPaginationNoCount",
     "PAGE_SIZE": 5,
 }
+
+
+# Vite - Django connection
+VITE_BUILD_DIRNAME = "build"
+VITE_STATIC_BUNDLE = BASE_DIR / f"static/{VITE_BUILD_DIRNAME}"
+VITE_LIVE_SERVER = False
+"""
+// https://vitejs.dev/config/
+// https://vitejs.dev/config/build-options.html#build-manifest
+// https://vitejs.dev/config/build-options.html#build-emptyoutdir
+
+// vite.config.js
+import { fileURLToPath, URL } from 'node:url'
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [vue()],
+  build: {
+    manifest: true,
+    outDir: "../static/"
+  },
+  base: process.env.NODE_ENV === "production" ? "/static/" : "/",
+  root: "./src",
+  resolve: {
+    alias: {
+      '@': fileURLToPath(new URL('./src', import.meta.url))
+    }
+  }
+})
+
+<!-- index.html -->
+<head>
+{% render_vite_assets %}
+</head>
+"""
