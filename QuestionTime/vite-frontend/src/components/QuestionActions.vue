@@ -1,21 +1,12 @@
 <template>
   <div class="mt-3">
-    <router-link
-      :to="{ name: 'question-editor', params: { slug: slug } }"
-      class="btn btn-sm btn-warning"
-      >Edit
+    <router-link :to="{ name: 'question-editor', params: { slug: slug } }" class="btn btn-sm btn-warning">
+      Edit
     </router-link>
-    <button
-      class="btn btn-sm btn-danger mx-1"
-      @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn"
-    >
+    <button class="btn btn-sm btn-danger mx-1" @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn">
       Delete
     </button>
-    <button
-      v-show="showDeleteConfirmationBtn"
-      class="btn btn-sm btn-outline-danger"
-      @click="deleteQuestion"
-    >
+    <button v-show="showDeleteConfirmationBtn" class="btn btn-sm btn-outline-danger" @click="deleteQuestion">
       Yes, delete my question!
     </button>
     <hr />
@@ -24,6 +15,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+
 export default {
   name: "QuestionActions",
   props: {

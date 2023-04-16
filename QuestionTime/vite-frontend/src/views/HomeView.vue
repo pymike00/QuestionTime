@@ -8,10 +8,8 @@
             <span class="question-author">{{ question.author }}</span>
           </p>
           <h2>
-            <router-link
-              :to="{ name: 'question', params: { slug: question.slug } }"
-              class="question-link"
-              >{{ question.content }}
+            <router-link :to="{ name: 'question', params: { slug: question.slug } }" class="question-link">
+              {{ question.content }}
             </router-link>
           </h2>
           <p class="mb-0">Answers: {{ question.answers_count }}</p>
@@ -20,11 +18,7 @@
     </div>
     <div class="my-4">
       <p v-show="loadingQuestions">...loading...</p>
-      <button
-        v-show="next"
-        @click="getQuestions"
-        class="btn btn-sm btn-outline-success"
-      >
+      <button v-show="next" @click="getQuestions" class="btn btn-sm btn-outline-success">
         Load More
       </button>
     </div>
@@ -33,6 +27,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+
 export default {
   name: "home-view",
   data() {

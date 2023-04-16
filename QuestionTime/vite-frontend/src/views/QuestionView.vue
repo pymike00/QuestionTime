@@ -16,12 +16,7 @@
       <div v-else-if="showForm">
         <form @submit.prevent="onSubmit">
           <p>Answer the Question</p>
-          <textarea
-            v-model="newAnswerBody"
-            class="form-control"
-            placeholder="Share Your Knowledge!"
-            rows="10"
-          ></textarea>
+          <textarea v-model="newAnswerBody" class="form-control" placeholder="Share Your Knowledge!" rows="10"></textarea>
           <button type="submit" class="btn btn-success my-3">
             Submit Your Answer
           </button>
@@ -40,20 +35,11 @@
       <h1 class="error text-center">404 - Question Not Found</h1>
     </div>
     <div v-if="question" class="container">
-      <AnswerComponent
-        v-for="answer in answers"
-        :answer="answer"
-        :requestUser="requestUser"
-        :key="answer.uuid"
-        @delete-answer="deleteAnswer"
-      />
+      <AnswerComponent v-for="answer in answers" :answer="answer" :requestUser="requestUser" :key="answer.uuid"
+        @delete-answer="deleteAnswer" />
       <div class="my-4">
         <p v-show="loadingAnswers">...loading...</p>
-        <button
-          v-show="next"
-          @click="getQuestionAnswers"
-          class="btn btn-sm btn-outline-success"
-        >
+        <button v-show="next" @click="getQuestionAnswers" class="btn btn-sm btn-outline-success">
           Load More
         </button>
       </div>
@@ -65,6 +51,7 @@
 import { axios } from "@/common/api.service.js";
 import AnswerComponent from "@/components/Answer.vue";
 import QuestionActions from "@/components/QuestionActions.vue";
+
 export default {
   name: "QuestionView",
   props: {
@@ -188,7 +175,7 @@ export default {
 <style scoped>
 .author-name {
   font-weight: bold;
-  color: #dc3545;
+  color: #DC3545;
 }
 
 .answer-added {

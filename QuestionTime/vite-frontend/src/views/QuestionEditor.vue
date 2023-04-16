@@ -2,12 +2,7 @@
   <div class="container mt-2">
     <h1 class="mb-3">Ask a Question</h1>
     <form @submit.prevent="onSubmit">
-      <textarea
-        v-model="questionBody"
-        class="form-control"
-        placeholder="What do you want to ask?"
-        rows="3"
-      ></textarea>
+      <textarea v-model="questionBody" class="form-control" placeholder="What do you want to ask?" rows="3"></textarea>
       <button type="submit" class="btn btn-success mt-3">Publish</button>
     </form>
     <p v-if="error" class="muted mt-2">{{ error }}</p>
@@ -16,6 +11,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+
 export default {
   name: "QuestionEditor",
   props: {

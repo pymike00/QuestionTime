@@ -1,23 +1,20 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light my-navbar">
     <div class="container">
-      <router-link :to="{ name: 'home' }" class="navbar-brand"
-        >QuestionTime
+      <router-link :to="{ name: 'home' }" class="navbar-brand">
+        QuestionTime
       </router-link>
 
       <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item mx-1">
-            <router-link
-              :to="{ name: 'question-editor' }"
-              :params="{ slug: undefined }"
-              class="btn btn-danger"
-              >Ask Question
+            <router-link :to="{ name: 'question-editor' }" :params="{ slug: undefined }" class="btn btn-danger">
+              Ask Question
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-secondary" href="/accounts/logout/"
-              >Logout
+            <a class="btn btn-outline-secondary" href="/accounts/logout/">
+              Logout
             </a>
           </li>
         </ul>
@@ -34,7 +31,7 @@ export default {
 
 <style>
 .my-navbar {
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #DDD;
 }
 
 .navbar-brand {
@@ -43,6 +40,6 @@ export default {
 }
 
 .navbar-brand:hover {
-  color: #dc3545 !important;
+  color: #DC3545 !important;
 }
 </style>

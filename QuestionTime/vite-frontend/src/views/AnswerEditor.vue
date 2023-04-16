@@ -12,6 +12,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+
 export default {
   name: "AnswerEditor",
   props: {
