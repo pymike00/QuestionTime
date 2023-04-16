@@ -1,22 +1,48 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { createRouter, createWebHistory } from 'vue-router';
+import HomeView from "../views/HomeView.vue";
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory("/"),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: "/",
+      name: "home",
+      component: HomeView,
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue')
-    }
+      path: "/question/:slug",
+      name: "question",
+      component: () =>
+        import(
+          /* webpackChunkName: "question-page" */ "../views/QuestionView.vue"
+        ),
+      props: true,
+    },
+    {
+      // the ? sign makes the slug parameter optional
+      path: "/ask/:slug?",
+      name: "question-editor",
+      component: () =>
+        import(
+          /* webpackChunkName: "question-editor" */ "../views/QuestionEditor.vue"
+        ),
+      props: true,
+    },
+    {
+      path: "/answer/:uuid",
+      name: "answer-editor",
+      component: () =>
+        import(
+          /* webpackChunkName: "answer-editor" */ "../views/AnswerEditor.vue"
+        ),
+      props: true,
+    },
+    {
+      path: "/:catchAll(.*)",
+      name: "page-not-found",
+      component: () =>
+        import(/* webpackChunkName: "not-found" */ "../views/NotFound.vue"),
+    },
   ]
 })
 

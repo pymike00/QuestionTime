@@ -144,7 +144,7 @@ REST_FRAMEWORK = {
 # Vite - Django connection
 VITE_BUILD_DIRNAME = "build"
 VITE_STATIC_BUNDLE = BASE_DIR / f"static/{VITE_BUILD_DIRNAME}"
-VITE_LIVE_SERVER = False
+VITE_LIVE_SERVER = True
 """
 // https://vitejs.dev/config/
 // https://vitejs.dev/config/build-options.html#build-manifest

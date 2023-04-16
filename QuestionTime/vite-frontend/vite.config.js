@@ -12,7 +12,7 @@ export default defineConfig({
     outDir: "../static/build/",
     emptyOutDir: true
   },
-  base: process.env.NODE_ENV === "production" ? "/static/" : "/",
+  base: process.env.NODE_ENV === "production" ? "/static/build/" : "/",
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),
