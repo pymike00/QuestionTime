@@ -146,29 +146,28 @@ VITE_BUILD_DIRNAME = "build"
 VITE_STATIC_BUNDLE = BASE_DIR / f"static/{VITE_BUILD_DIRNAME}"
 VITE_LIVE_SERVER = True
 """
+// vite.config.js
+import { fileURLToPath, URL } from "node:url";
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+
 // https://vitejs.dev/config/
 // https://vitejs.dev/config/build-options.html#build-manifest
 // https://vitejs.dev/config/build-options.html#build-emptyoutdir
-
-// vite.config.js
-import { fileURLToPath, URL } from 'node:url'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-
 export default defineConfig({
   plugins: [vue()],
   build: {
     manifest: true,
-    outDir: "../static/"
+    outDir: "../static/build/",
+    emptyOutDir: true
   },
-  base: process.env.NODE_ENV === "production" ? "/static/" : "/",
-  root: "./src",
+  base: process.env.NODE_ENV === "production" ? "/static/build/" : "/",
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url))
-    }
-  }
-})
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
+    },
+  },
+});
 
 <!-- index.html -->
 <head>
