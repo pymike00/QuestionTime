@@ -6,6 +6,7 @@
 #### Clone the repo and move inside it:
 ```
 git clone https://github.com/pymike00/QuestionTime.git
+cd QuestionTime
 ```
 
 #### Create a new Python Virtual Environment:
@@ -13,14 +14,13 @@ git clone https://github.com/pymike00/QuestionTime.git
 python3 -m venv venv
 ```
 
-#### Activate the environment and install Django dependencies:
-
+#### Activate the venv and install Django dependencies:
 ```
 source ./venv/bin/activate
 pip install -m ./requirements.txt
 ```
 
-#### Apply migrations:
+#### Apply Django migrations:
 ```
 python manage.py migrate
 ```
