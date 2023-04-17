@@ -1,0 +1,41 @@
+{% extends "auth_layout.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<h1 class="text-light">QuestionTime</h1>
+<p class="text-light mb-4">Share Your Knowledge!</p>
+<div class="form-container">
+  <form method="POST">
+    {% csrf_token %}
+
+    <!-- https://getbootstrap.com/docs/5.1/forms/floating-labels/#example -->
+    <!-- https://github.com/jazzband/django-widget-tweaks -->
+
+    <div class="form-floating mb-3">
+      {% render_field form.username class="form-control" id="floatingUsername" placeholder="Username" %}
+      <label for="floatingUsername">Username</label>
+    </div>
+
+    <div class="form-floating mb-3">
+      {% render_field form.password class="form-control" id="floatingPassword" placeholder="Password" %}
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    {% if form.errors %}
+    <div class="text-danger my-3">
+      {% for error in form.non_field_errors %}
+      {{ error }}
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="d-grid gap-2">
+      <button type="submit" class="btn btn-lg btn-primary">Login</button>
+    </div>
+  </form>
+
+  <p class="text-light mt-4">
+    Or <a href="{% url 'django_registration_register' %}" class="auth-link">Create an Account</a>
+  </p>
+</div>
+{% endblock %}
