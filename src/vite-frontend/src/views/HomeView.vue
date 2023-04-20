@@ -74,7 +74,7 @@ export default {
 }
 
 .question-link {
-  font-weight: 400;
+  font-weight: 600;
   color: black;
   text-decoration: none;
 }
