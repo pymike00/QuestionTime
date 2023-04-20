@@ -39,7 +39,7 @@
       <label for="floatingPassword1">Choose a password</label>
       {% if form.password1.errors %}
       <div class="text-danger mt-2">
-        {% for error in form.password2.errors %}
+        {% for error in form.password1.errors %}
         {{ error }}
         {% endfor %}
       </div>
