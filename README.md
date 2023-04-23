@@ -45,4 +45,4 @@ python manage.py runserver
 
 
 ### What about the Vue CLI implementation?
-An older version of this application used Vue CLI, which has since been replaced by Vite. You can still access the Vite implementation [from this branch](https://github.com/pymike00/QuestionTime/tree/legacy-v3). 
+An older version of this application used Vue CLI, which has since been replaced by Vite. You can still access the Vue CLI implementation [from this branch](https://github.com/pymike00/QuestionTime/tree/legacy-v3). 
