@@ -42,3 +42,7 @@ python manage.py runserver
 ```
 
 #### Go to http://127.0.0.1:8000 and the app is now running in development mode with Hot Module Replacement!
+
+
+### What about the Vue CLI implementation?
+An older version of this application used Vue CLI, which has since been replaced by Vite. You can still access the Vite implementation [from this branch](https://github.com/pymike00/QuestionTime/tree/legacy-v3). 
