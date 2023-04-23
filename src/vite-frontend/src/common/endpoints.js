@@ -1,12 +1,12 @@
-const baseAcademyEndpoint = "/api/v1/";
+const baseEndpoint = "/api/v1/";
 
 const endpoints = {
-  questionsCRUD: `${baseAcademyEndpoint}questions/`,
-  questionsAnswersList: `${baseAcademyEndpoint}questions-answers/`,
-  questionsNewAnswer: `${baseAcademyEndpoint}questions-new-answer/`,
-  
-  answersDetail: `${baseAcademyEndpoint}answers-detail/`,
-  answersLike: `${baseAcademyEndpoint}answers-like/`,
+  questionsCRUD: `${baseEndpoint}questions/`,
+  questionsAnswersList: `${baseEndpoint}questions-answers/`,
+  questionsNewAnswer: `${baseEndpoint}questions-new-answer/`,
+
+  answersDetail: `${baseEndpoint}answers-detail/`,
+  answersLike: `${baseEndpoint}answers-like/`,
 
   usersDetail: "/auth/users/me/"
 };
