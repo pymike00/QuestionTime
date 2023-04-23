@@ -17,9 +17,9 @@
     </div>
     <div v-else>
       <button type="button" class="btn" @click="toggleLike" :class="{
-        'btn-warning': userLikedAnswer,
-        'btn-outline-danger': !userLikedAnswer,
-      }">
+          'btn-warning': userLikedAnswer,
+          'btn-outline-danger': !userLikedAnswer,
+        }">
         Like Answer&nbsp;
         <span class="badge bg-danger">{{ likesCounter }}</span>
       </button>
