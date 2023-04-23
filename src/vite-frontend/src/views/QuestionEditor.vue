@@ -11,6 +11,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 
 export default {
   name: "QuestionEditor",
@@ -29,7 +30,7 @@ export default {
   methods: {
     async performNetworkRequest() {
       // Tell the REST API to create or update a Question instance;
-      let endpoint = "/api/v1/questions/";
+      let endpoint = endpoints["questionsCRUD"];
       let method = "POST";
       if (this.slug !== undefined && this.slug !== "") {
         endpoint += `${this.slug}/`;
@@ -64,7 +65,7 @@ export default {
     // if the component is used to update a question
     // get the question's data from the REST API
     if (to.params.slug !== undefined && to.params.slug !== "") {
-      const endpoint = `/api/v1/questions/${to.params.slug}/`;
+      const endpoint = `${endpoints["questionsCRUD"]}${to.params.slug}/`;
       try {
         const response = await axios.get(endpoint);
         return next((vm) => (vm.questionBody = response.data.content));

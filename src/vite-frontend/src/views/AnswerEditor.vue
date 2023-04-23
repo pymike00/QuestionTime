@@ -12,6 +12,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 
 export default {
   name: "AnswerEditor",
@@ -34,7 +35,7 @@ export default {
         this.error = "You can't submit an empty answer!";
         return;
       }
-      const endpoint = `/api/v1/answers/${this.uuid}/`;
+      const endpoint = `${endpoints["answersDetail"]}${this.uuid}/`;
       try {
         await axios.put(endpoint, { body: this.answerBody });
         this.$router.push({
@@ -49,7 +50,7 @@ export default {
   },
   async beforeRouteEnter(to, from, next) {
     // get the answer's data from the REST API and set two data properties for the component
-    const endpoint = `/api/v1/answers/${to.params.uuid}/`;
+    const endpoint = `${endpoints["answersDetail"]}${to.params.uuid}/`;
     try {
       const response = await axios.get(endpoint);
       return next(

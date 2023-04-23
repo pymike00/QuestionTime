@@ -7,6 +7,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 import NavbarComponent from "@/components/Navbar.vue";
 
 export default {
@@ -18,7 +19,7 @@ export default {
     async setUserInfo() {
       // add the username of the current user to localStorage
       try {
-        const response = await axios.get("/auth/users/me/");
+        const response = await axios.get(endpoints["usersDetail"]);
         const requestUser = response.data["username"];
         window.localStorage.setItem("username", requestUser);
       } catch (error) {

@@ -9,19 +9,19 @@ router.register(r"questions", qv.QuestionViewSet)
 urlpatterns = [
     path("", include(router.urls)), 
 
-    path("questions/<slug:slug>/answers/", 
+    path("questions-answers/<slug:slug>/",
          qv.AnswerListAPIView.as_view(),
          name="answer-list"),
 
-    path("questions/<slug:slug>/answer/", 
+    path("questions-new-answer/<slug:slug>/",
          qv.AnswerCreateAPIView.as_view(),
          name="answer-create"),
 
-    path("answers/<uuid:uuid>/", 
+    path("answers-detail/<uuid:uuid>/",
          qv.AnswerRUDAPIView.as_view(),
          name="answer-detail"),
 
-    path("answers/<uuid:uuid>/like/",
+    path("answers-like/<uuid:uuid>/",
          qv.AnswerLikeAPIView.as_view(),
          name="answer-like")
 ]

@@ -30,6 +30,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 
 export default {
   name: "AnswerComponent",
@@ -63,7 +64,7 @@ export default {
     async likeAnswer() {
       this.userLikedAnswer = true;
       this.likesCounter += 1;
-      const endpoint = `/api/v1/answers/${this.answer.uuid}/like/`;
+      const endpoint = `${endpoints["answersLike"]}${this.answer.uuid}/`;
       try {
         await axios.post(endpoint);
       } catch (error) {
@@ -74,7 +75,7 @@ export default {
     async unLikeAnswer() {
       this.userLikedAnswer = false;
       this.likesCounter -= 1;
-      const endpoint = `/api/v1/answers/${this.answer.uuid}/like/`;
+      const endpoint = `${endpoints["answersLike"]}${this.answer.uuid}/`;
       try {
         await axios.delete(endpoint);
       } catch (error) {

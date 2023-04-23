@@ -15,6 +15,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 
 export default {
   name: "QuestionActions",
@@ -31,7 +32,7 @@ export default {
   },
   methods: {
     async deleteQuestion() {
-      const endpoint = `/api/v1/questions/${this.slug}/`;
+      const endpoint = `${endpoints["questionsCRUD"]}${this.slug}/`;
       try {
         await axios.delete(endpoint);
         this.$router.push({

@@ -27,6 +27,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 
 export default {
   name: "home-view",
@@ -40,7 +41,7 @@ export default {
   methods: {
     async getQuestions() {
       // make a GET Request to the questions list endpoint and populate the questions array
-      let endpoint = "/api/v1/questions/";
+      let endpoint = endpoints["questionsCRUD"];
       if (this.next) {
         endpoint = this.next;
       }

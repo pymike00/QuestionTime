@@ -49,6 +49,7 @@
 
 <script>
 import { axios } from "@/common/api.service.js";
+import { endpoints } from "@/common/endpoints.js";
 import AnswerComponent from "@/components/Answer.vue";
 import QuestionActions from "@/components/QuestionActions.vue";
 
@@ -94,7 +95,7 @@ export default {
     },
     async getQuestionData() {
       // get the details of a question instance from the REST API and call setPageTitle
-      const endpoint = `/api/v1/questions/${this.slug}/`;
+      const endpoint = `${endpoints["questionsCRUD"]}${this.slug}/`;
       try {
         const response = await axios.get(endpoint);
         this.question = response.data;
@@ -108,7 +109,7 @@ export default {
     },
     async getQuestionAnswers() {
       // get a page of answers for a single question from the REST API's paginated 'Questions Endpoint'
-      let endpoint = `/api/v1/questions/${this.slug}/answers/`;
+      let endpoint = `${endpoints["questionsAnswersList"]}${this.slug}/`;
       if (this.next) {
         endpoint = this.next;
       }
@@ -134,7 +135,7 @@ export default {
         this.error = "You can't send an empty answer!";
         return;
       }
-      const endpoint = `/api/v1/questions/${this.slug}/answer/`;
+      const endpoint = `${endpoints["questionsNewAnswer"]}${this.slug}/`;
       try {
         const response = await axios.post(endpoint, {
           body: this.newAnswerBody,
@@ -153,7 +154,7 @@ export default {
     },
     async deleteAnswer(answer) {
       // delete a given answer from the answers array and make a delete request to the REST API
-      const endpoint = `/api/v1/answers/${answer.uuid}/`;
+      const endpoint = `${endpoints["answersDetail"]}${answer.uuid}/`;
       try {
         await axios.delete(endpoint);
         this.answers.splice(this.answers.indexOf(answer), 1);
