@@ -30,7 +30,7 @@ import { axios } from "@/common/api.service.js";
 import { endpoints } from "@/common/endpoints.js";
 
 export default {
-  name: "home-view",
+  name: "HomeView",
   data() {
     return {
       questions: [],
