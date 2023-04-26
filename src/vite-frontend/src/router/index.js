@@ -12,36 +12,29 @@ const router = createRouter({
     {
       path: "/question/:slug",
       name: "question",
-      component: () =>
-        import(
-          /* webpackChunkName: "question-page" */ "../views/QuestionView.vue"
-        ),
+      // route level code-splitting
+      // this generates a separate chunk (QuestionView.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import("../views/QuestionView.vue"),
       props: true,
     },
     {
       // the ? sign makes the slug parameter optional
       path: "/ask/:slug?",
       name: "question-editor",
-      component: () =>
-        import(
-          /* webpackChunkName: "question-editor" */ "../views/QuestionEditor.vue"
-        ),
+      component: () => import("../views/QuestionEditor.vue"),
       props: true,
     },
     {
       path: "/answer/:uuid",
       name: "answer-editor",
-      component: () =>
-        import(
-          /* webpackChunkName: "answer-editor" */ "../views/AnswerEditor.vue"
-        ),
+      component: () => import("../views/AnswerEditor.vue"),
       props: true,
     },
     {
       path: "/:catchAll(.*)",
       name: "page-not-found",
-      component: () =>
-        import(/* webpackChunkName: "not-found" */ "../views/NotFound.vue"),
+      component: () => import("../views/NotFound.vue"),
     },
   ]
 })
