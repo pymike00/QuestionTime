@@ -7,6 +7,7 @@
     <div class="mb-2">
       <textarea v-if="editingAnswer" v-model="answer.body" class="form-control" rows="6"></textarea>
       <p v-else style="white-space: pre-wrap;">{{ answer.body }}</p>
+      <p v-if="error" class="fw-bold text-danger mt-2">{{ error }}</p>
     </div>
 
     <div v-if="isAnswerAuthor">
@@ -55,6 +56,7 @@ export default {
       editingAnswer: false,
       userLikedAnswer: this.answer.user_has_liked_answer,
       likesCounter: this.answer.likes_count,
+      error: null
     };
   },
   computed: {
@@ -73,9 +75,12 @@ export default {
       try {
         await axios.put(endpoint, { body: this.answer.body });
         this.editingAnswer = false;
+        if (this.error) {
+          this.error = null;
+        }
       } catch (error) {
         console.log(error.response);
-        alert(error.response.statusText);
+        this.error = error.response.statusText;    
       }
     },
     toggleLike() {
