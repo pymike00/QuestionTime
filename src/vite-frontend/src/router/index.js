@@ -26,12 +26,6 @@ const router = createRouter({
       props: true,
     },
     {
-      path: "/answer/:uuid",
-      name: "answer-editor",
-      component: () => import("../views/AnswerEditor.vue"),
-      props: true,
-    },
-    {
       path: "/:catchAll(.*)",
       name: "page-not-found",
       component: () => import("../views/NotFound.vue"),

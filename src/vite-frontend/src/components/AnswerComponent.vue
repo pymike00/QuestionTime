@@ -3,11 +3,16 @@
     <p class="text-muted">
       <strong>{{ answer.author }}</strong> &#8901; {{ answer.created_at }}
     </p>
-    <p style="white-space: pre-wrap;">{{ answer.body }}</p>
+
+    <div class="mb-2">
+      <textarea v-if="editingAnswer" v-model="answer.body" class="form-control" rows="6"></textarea>
+      <p v-else style="white-space: pre-wrap;">{{ answer.body }}</p>
+    </div>
+
     <div v-if="isAnswerAuthor">
-      <router-link :to="{ name: 'answer-editor', params: { uuid: answer.uuid } }" class="btn btn-sm btn-warning me-1">
-        Edit
-      </router-link>
+      <button v-if="editingAnswer" class="btn btn-sm btn-warning" @click="updateAnswer">Edit</button>
+      <button v-else class="btn btn-sm btn-warning" @click="editingAnswer = true">Edit</button>
+
       <button class="btn btn-sm btn-danger mx-1" @click="showDeleteConfirmationBtn = !showDeleteConfirmationBtn">
         Delete
       </button>
@@ -47,6 +52,7 @@ export default {
   data() {
     return {
       showDeleteConfirmationBtn: false,
+      editingAnswer: false,
       userLikedAnswer: this.answer.user_has_liked_answer,
       likesCounter: this.answer.likes_count,
     };
@@ -58,6 +64,20 @@ export default {
     },
   },
   methods: {
+    async updateAnswer() {
+      if (!this.answer.body) {
+        this.error = "You can't submit an empty answer!";
+        return;
+      }
+      const endpoint = `${endpoints["answersDetail"]}${this.answer.uuid}/`;
+      try {
+        await axios.put(endpoint, { body: this.answer.body });
+        this.editingAnswer = false;
+      } catch (error) {
+        console.log(error.response);
+        alert(error.response.statusText);
+      }
+    },
     toggleLike() {
       this.userLikedAnswer === false ? this.likeAnswer() : this.unLikeAnswer();
     },
