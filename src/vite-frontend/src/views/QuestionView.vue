@@ -17,7 +17,7 @@
         <form @submit.prevent="onSubmit">
           <p>Answer the Question</p>
           <textarea v-model="newAnswerBody" class="form-control" placeholder="Share Your Knowledge!" rows="10"></textarea>
-          <button type="submit" class="btn btn-success my-3">
+          <button type="submit" class="btn btn-sm btn-success my-3">
             Submit Your Answer
           </button>
         </form>
@@ -25,7 +25,7 @@
       </div>
 
       <div v-else>
-        <button class="btn btn-success" @click="showForm = true">
+        <button class="btn btn-sm btn-success" @click="showForm = true">
           Answer The Question
         </button>
       </div>

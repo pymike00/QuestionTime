@@ -21,7 +21,7 @@
       </button>
     </div>
     <div v-else>
-      <button type="button" class="btn" @click="toggleLike" :class="{
+      <button type="button" class="btn btn-sm" @click="toggleLike" :class="{
           'btn-warning': userLikedAnswer,
           'btn-outline-danger': !userLikedAnswer,
         }">
