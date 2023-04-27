@@ -8,7 +8,7 @@
 <script>
 import { axios } from "@/common/api.service.js";
 import { endpoints } from "@/common/endpoints.js";
-import NavbarComponent from "@/components/Navbar.vue";
+import NavbarComponent from "@/components/NavbarComponent.vue";
 
 export default {
   name: "App",

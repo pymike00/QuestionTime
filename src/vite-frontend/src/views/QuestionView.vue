@@ -50,7 +50,7 @@
 <script>
 import { axios } from "@/common/api.service.js";
 import { endpoints } from "@/common/endpoints.js";
-import AnswerComponent from "@/components/Answer.vue";
+import AnswerComponent from "@/components/AnswerComponent.vue";
 import QuestionActions from "@/components/QuestionActions.vue";
 
 export default {
