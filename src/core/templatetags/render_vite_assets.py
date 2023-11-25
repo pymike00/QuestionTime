@@ -17,7 +17,7 @@ def render_vite_assets():
             </script><script type='module' src='http://localhost:5173/src/main.js'></script>
             """
         )
-    manifest_json_path = os.path.join(settings.VITE_STATIC_BUNDLE, "manifest.json")
+    manifest_json_path = os.path.join(settings.VITE_STATIC_BUNDLE, ".vite", "manifest.json")
     try:
         with open(manifest_json_path, "r") as f:
             manifest = json.load(f)
