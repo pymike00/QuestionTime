@@ -13,7 +13,7 @@
             </router-link>
           </li>
           <li class="nav-item">
-            <a class="btn btn-outline-secondary" href="/accounts/logout/">
+            <a class="btn btn-outline-secondary" @click="performLogout()" href="#">
               Logout
             </a>
           </li>
@@ -24,8 +24,20 @@
 </template>
 
 <script>
+import { axios } from "@/common/api.service.js";
 export default {
   name: "NavbarComponent",
+  methods: {
+    async performLogout() {
+      try {
+        await axios.post("/accounts/logout/", {});
+        // Redirect to the login page after logout
+        window.location.href = '/accounts/login/';
+      } catch (error) {
+        console.error("Logout failed", error);
+      }
+    }
+  }
 };
 </script>
 
